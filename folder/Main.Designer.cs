@@ -79,6 +79,7 @@ namespace folder
             this.MaximizeBox = false;
             this.Name = "Main";
             this.Text = "Folder";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

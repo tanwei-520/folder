@@ -20,7 +20,6 @@ namespace folder
         {
             InitializeComponent();
             Cpublic.log.Info("程序启动");
-            Cpublic.log.Debug("程序启动");
         }
 
         private void 批量新建文件夹ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -50,6 +49,11 @@ namespace folder
         }
 
         private void 监听文件夹ToolStripMenuItem_DropDownClosed(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void Main_FormClosed(object sender, FormClosedEventArgs e)
         {
             Cpublic.log.Info("程序关闭");
         }
