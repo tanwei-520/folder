@@ -100,6 +100,7 @@ namespace folder
                     int y = 11;
                     int i = 1;
                     int ip = 0;
+                    this.panel1.Controls.Clear();
                     for (; i < sheet.LastRowNum+1; i++)
                     {
                         row = sheet.GetRow(i);
@@ -116,7 +117,6 @@ namespace folder
                             }
                         }
                         url = Gtext.Text + "" + url;
-                        this.panel1.Controls.Clear();
                         int x = panel1.VerticalScroll.Value;
                         Label checkBox = new Label
                         {
@@ -145,13 +145,13 @@ namespace folder
                         {
                             checkBox.Text = "创建失败：" + url;
                             checkBox.ForeColor = Color.FromArgb(251, 38, 38);
-                            Cpublic.log.Error(url+"创建失败" + ex.Message);
+                            Cpublic.log.Error(url+"创建失败 " + ex.Message);
                         }
                         panel1.Controls.Add(checkBox);       
                         y += 25;
                     }
                     fileStream.Close();
-                    label3.Text = "共" + (i-1) + "条创建命令，成功创建"+ip+"个文件夹";
+                    label3.Text = "共" + (i-1) + "条创建命令，完成"+ip+"条";
                     Cpublic.log.Info(label3.Text);
                 }
                 catch (Exception ex)

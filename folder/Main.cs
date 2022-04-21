@@ -19,6 +19,7 @@ namespace folder
         public Main()
         {
             InitializeComponent();
+            this.ShowInTaskbar = true;
             Cpublic.log.Info("程序启动");
         }
 
@@ -45,17 +46,86 @@ namespace folder
             {
                 MdiParent = this
             };
+            // f.Dock = DockStyle.Fill;
+            f.WindowState = FormWindowState.Maximized;
             f.Show();
-        }
-
-        private void 监听文件夹ToolStripMenuItem_DropDownClosed(object sender, EventArgs e)
-        {
-           
         }
 
         private void Main_FormClosed(object sender, FormClosedEventArgs e)
         {
             Cpublic.log.Info("程序关闭");
+        }
+
+        private void Main_MinimumSizeChanged(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                //隐藏任务栏区图标
+                this.ShowInTaskbar = false;
+                //图标显示在托盘区
+                notifyIcon1.Visible = true;
+            }
+        }
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                //把最小化的窗体显示出来
+                WindowState = FormWindowState.Normal;
+                //激活窗体并赋予焦点
+                //ss this.Activate();
+                //任务栏区显示图标
+                //this.ActiveMdiChild.Close();
+              // ActiveMdiChild.WindowState = FormWindowState.Maximized;
+                this.ShowInTaskbar = true;
+                //托盘区图标隐藏
+                notifyIcon1.Visible = true;
+            }
+            else
+            {
+                this.Activate();
+                //将窗体前置
+                this.TopMost = true;
+                //解除窗体前置
+                this.TopMost = false;
+                //任务栏区显示图标
+                this.ShowInTaskbar = true;
+                //托盘区图标隐藏
+                notifyIcon1.Visible = true;
+            }
+        }
+
+        private void 显示程序ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.ShowInTaskbar = true;
+            //将窗体显示出来
+            WindowState = FormWindowState.Normal;
+        }
+        private void 退出程序ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            // 关闭所有的线程
+            Cpublic.log.Info("程序关闭");
+            this.Dispose();
+            this.Close();
+        }
+
+        private void 保持最前ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!this.保持最前ToolStripMenuItem.Checked)
+            {
+                //解除窗体前置
+                this.TopMost = false;
+            }
+            else
+            {
+                //还原窗体显示    
+                WindowState = FormWindowState.Normal;
+                //焦点激活
+                this.Activate();
+                //将窗体前置
+                this.TopMost = true;
+            }
         }
     }
 }

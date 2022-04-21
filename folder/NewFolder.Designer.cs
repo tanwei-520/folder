@@ -139,7 +139,7 @@ namespace folder
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "NewFolder";
-            this.Text = "NewFolder";
+            this.Text = "批量新建文件夹";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.ResumeLayout(false);
             this.PerformLayout();

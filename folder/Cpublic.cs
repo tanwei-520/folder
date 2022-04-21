@@ -12,6 +12,7 @@ namespace folder
     class Cpublic
     {
         public static string AppPath;
+        public static string tno { get; set; }
 /*        public static void Log(string logs)
         {
             if (!File.Exists(AppPath + "log.txt"))
@@ -22,5 +23,10 @@ namespace folder
             dout.Close();
         }*/ //自写日志
         public static readonly ILog log = LogManager.GetLogger(typeof(Program));//log4net日志
+        public  class Jl
+        {
+           public string Alllog { get; set;}
+           public  string Name { get; set; }
+        }
     }
 }

@@ -29,11 +29,18 @@ namespace folder
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.批量新建文件夹ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.监听文件夹ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.显示程序ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.保持最前ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.退出程序ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -43,6 +50,7 @@ namespace folder
             this.监听文件夹ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.menuStrip1.Size = new System.Drawing.Size(975, 25);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
@@ -61,13 +69,52 @@ namespace folder
             this.监听文件夹ToolStripMenuItem.Name = "监听文件夹ToolStripMenuItem";
             this.监听文件夹ToolStripMenuItem.Size = new System.Drawing.Size(96, 21);
             this.监听文件夹ToolStripMenuItem.Text = "监听文件夹";
-            this.监听文件夹ToolStripMenuItem.DropDownClosed += new System.EventHandler(this.监听文件夹ToolStripMenuItem_DropDownClosed);
             this.监听文件夹ToolStripMenuItem.Click += new System.EventHandler(this.监听文件夹ToolStripMenuItem_Click);
+            // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.ContextMenuStrip = this.contextMenuStrip1;
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "Folder";
+            this.notifyIcon1.Visible = true;
+            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.显示程序ToolStripMenuItem,
+            this.保持最前ToolStripMenuItem,
+            this.退出程序ToolStripMenuItem1});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 70);
+            // 
+            // 显示程序ToolStripMenuItem
+            // 
+            this.显示程序ToolStripMenuItem.Name = "显示程序ToolStripMenuItem";
+            this.显示程序ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.显示程序ToolStripMenuItem.Text = "显示程序";
+            this.显示程序ToolStripMenuItem.Click += new System.EventHandler(this.显示程序ToolStripMenuItem_Click);
+            // 
+            // 保持最前ToolStripMenuItem
+            // 
+            this.保持最前ToolStripMenuItem.CheckOnClick = true;
+            this.保持最前ToolStripMenuItem.Name = "保持最前ToolStripMenuItem";
+            this.保持最前ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.保持最前ToolStripMenuItem.Text = "保持最前";
+            this.保持最前ToolStripMenuItem.Click += new System.EventHandler(this.保持最前ToolStripMenuItem_Click);
+            // 
+            // 退出程序ToolStripMenuItem1
+            // 
+            this.退出程序ToolStripMenuItem1.Name = "退出程序ToolStripMenuItem1";
+            this.退出程序ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
+            this.退出程序ToolStripMenuItem1.Text = "退出程序";
+            this.退出程序ToolStripMenuItem1.Click += new System.EventHandler(this.退出程序ToolStripMenuItem1_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(975, 594);
@@ -77,11 +124,15 @@ namespace folder
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(991, 633);
             this.Name = "Main";
+            this.ShowInTaskbar = false;
             this.Text = "Folder";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
+            this.SizeChanged += new System.EventHandler(this.Main_MinimumSizeChanged);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -92,6 +143,11 @@ namespace folder
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 批量新建文件夹ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 监听文件夹ToolStripMenuItem;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 显示程序ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 保持最前ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 退出程序ToolStripMenuItem1;
     }
 }
 
