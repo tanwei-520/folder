@@ -29,6 +29,7 @@ namespace folder
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Alter));
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -69,8 +70,12 @@ namespace folder
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Alter";
             this.Text = "自定义编号";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Alter_FormClosing);
+            this.Load += new System.EventHandler(this.Alter_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

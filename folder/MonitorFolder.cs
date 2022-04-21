@@ -333,6 +333,8 @@ namespace folder
                                     ActiveMdiChild.Close();
                                 }
                                 Alter f = new Alter();
+                                f.Activate();
+                                f.TopMost = true;
                                 f.ShowDialog();
                                 //  this.Invoke(new Action(() => { f.ShowDialog();}));
                                 //  
@@ -570,6 +572,11 @@ namespace folder
                         workbook.Close();
                         MessageBox.Show("生成成功，重命名记录放置在根目录下！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         Cpublic.log.Info("重命名记录生成成功：" + Gtext.Text + "\\重命名记录.xlsx");
+                    }
+                    else
+                    {
+                        MessageBox.Show("当前记录为空！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        Cpublic.log.Info("当前记录为空,不能导出重命名记录！");
                     }
                 }
             }

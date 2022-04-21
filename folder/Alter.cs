@@ -19,6 +19,21 @@ namespace folder
         {
             Cpublic.tno = textBox1.Text;
             Close();
+            this.Dispose();
+        }
+
+        private void Alter_Load(object sender, EventArgs e)
+        {
+            this.TopMost = true;
+        }
+
+        private void Alter_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (textBox1.Text=="")
+            {
+                MessageBox.Show("编号为空！","警告",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                e.Cancel = false;
+            }
         }
     }
 }
