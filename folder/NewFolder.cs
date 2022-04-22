@@ -143,6 +143,7 @@ namespace folder
                         }
                         catch (Exception ex)
                         {
+                            checkBox.AutoSize = true;
                             checkBox.Text = "创建失败：" + url;
                             checkBox.ForeColor = Color.FromArgb(251, 38, 38);
                             Cpublic.log.Error(url+"创建失败 " + ex.Message);

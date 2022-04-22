@@ -345,109 +345,116 @@ namespace folder
         {
             text("创建文件：" + e.Name,0x4876FF);
             Cpublic.log.Info("创建文件：" + e.Name);
-            DataRow d = create.NewRow();
-            d["path"] = e.FullPath.Substring(0, e.FullPath.LastIndexOf("\\"));
-            d["name"] = e.Name;
-            create.Rows.Add(d);
-            if (end == 2)
+            try
             {
-                bool done = false;
-                DataRow[] fc;
-                fc = create.Select("path = '" + e.FullPath.Substring(0, e.FullPath.LastIndexOf("\\")) + "'");
-                DataRow[] fd;
-                fd = initialize.Select("path = '" + e.FullPath.Substring(0, e.FullPath.LastIndexOf("\\"))+"'");
-                if (fd.Length<1)
+                if (end == 2)
                 {
-                    Cpublic.log.Error("该路径数据未能初始化成功：" + e.FullPath.Substring(0, e.FullPath.LastIndexOf("\\")));
-                    DataRow ac = initialize.NewRow();
-                    ac["path"] = e.FullPath.Substring(0, e.FullPath.LastIndexOf("\\"));
-                    ac["count"] = 1;
-                    fd[0] = ac;
-                }
-                string s = (int.Parse(fd[0]["count"].ToString()) + int.Parse(fc.Length.ToString())).ToString();
-                s = s.PadLeft((5), '0');
-                Cpublic.log.Info("S:" + s);
-                do
-                {
-                    try
+                    DataRow d = create.NewRow();
+                    d["path"] = e.FullPath.Substring(0, e.FullPath.LastIndexOf("\\"));
+                    d["name"] = e.Name;
+                    create.Rows.Add(d);
+                    bool done = false;
+                    DataRow[] fc;
+                    fc = create.Select("path = '" + e.FullPath.Substring(0, e.FullPath.LastIndexOf("\\")) + "'");
+                    DataRow[] fd;
+                    fd = initialize.Select("path = '" + e.FullPath.Substring(0, e.FullPath.LastIndexOf("\\")) + "'");
+                    if (fd.Length < 1)
                     {
-                        using (File.Open(e.FullPath, FileMode.Open)) { done = true; }
+                        Cpublic.log.Error("该路径数据未能初始化成功：" + e.FullPath.Substring(0, e.FullPath.LastIndexOf("\\")));
+                        DataRow ac = initialize.NewRow();
+                        ac["path"] = e.FullPath.Substring(0, e.FullPath.LastIndexOf("\\"));
+                        ac["count"] = 1;
+                        fd[0] = ac;
                     }
-                    catch { done = false; Cpublic.log.Error("文件被占用"); }
-                    Thread.Sleep(1000);
-                } while (!done);
-                string name = "";
-                string name2 = "";
-                string[] sname = e.FullPath.Replace(Gtext.Text, "").Split("\\", StringSplitOptions.None);
-                for (int i = 0; i < sname.Length - 1;)
-                {
-                    DataRow[] dr;
-                    string sql = "";
-                    if (sname[i] == "")
+                    string s = (int.Parse(fd[0]["count"].ToString()) + int.Parse(fc.Length.ToString())).ToString();
+                    s = s.PadLeft((5), '0');
+                    Cpublic.log.Info("S:" + s);
+                    do
                     {
-                        name2 += sname[i];
-                        sql = "" + Gtext.Text + "" + name2 + "";
+                        try
+                        {
+                            using (File.Open(e.FullPath, FileMode.Open)) { done = true; }
+                        }
+                        catch { done = false; Cpublic.log.Error("文件被占用"); }
+                        Thread.Sleep(800);
+                    } while (!done);
+                    string name = "";
+                    string name2 = "";
+                    string[] sname = e.FullPath.Replace(Gtext.Text, "").Split("\\", StringSplitOptions.None);
+                    for (int i = 0; i < sname.Length - 1;)
+                    {
+                        DataRow[] dr;
+                        string sql = "";
+                        if (sname[i] == "")
+                        {
+                            name2 += sname[i];
+                            sql = "" + Gtext.Text + "" + name2 + "";
+                        }
+                        else
+                        {
+                            name2 = name2 + "\\" + sname[i];
+                            sql = "" + Gtext.Text + "" + name2 + "";
+                        }
+                        dr = Data.Select("all='" + sql + "'");
+                        if (dr.Length > 0)
+                        {
+                            // Cpublic.log.Info("ssss:" + dr[0]["tno"].ToString());
+                            if (dr[0]["tno"].ToString() != "")
+                            {
+                                if (dr[0]["tno"].ToString() == "custom")
+                                {
+                                    if (ActiveMdiChild != null)
+                                    {
+                                        ActiveMdiChild.Close();
+                                    }
+                                    Alter f = new Alter();
+                                    f.Activate();
+                                    f.TopMost = true;
+                                    f.ShowDialog();
+                                    //  this.Invoke(new Action(() => { f.ShowDialog();}));
+                                    //  
+                                    if (Cpublic.tno != "" && Cpublic.tno != null)
+                                    {
+                                        name += Cpublic.tno + "-";
+                                    }
+                                }
+                                else
+                                {
+                                    name += dr[0]["tno"].ToString() + "-";
+                                }
+                            }
+                        }
+                        // Cpublic.log.Info(i + ":" + sql + ":" + dr.Length);
+                        i++;
+                    }
+                    if (name != "")
+                    {
+                        try
+                        {
+                            name += s;
+                            name += e.FullPath.Substring(e.FullPath.LastIndexOf("."));
+                            //ThreadPool.QueueUserWorkItem(Worker, fsArgs);
+                            File.Move(e.FullPath, e.FullPath.Substring(0, e.FullPath.LastIndexOf("\\")) + "\\" + name);
+                        }
+                        catch (Exception ex)
+                        {
+                            text("重命名失败,文件可能被占用", 0xFF34B3);
+                            Cpublic.log.Error("重命名失败：" + ex.Message);
+                        }
                     }
                     else
                     {
-                        name2 = name2 + "\\" + sname[i];
-                        sql = "" + Gtext.Text + "" + name2 + "";
+                        Cpublic.log.Info("当前路径下，重命名结果为空，若有异常请检查编码模板！ " + e.FullPath);
                     }
-                    dr = Data.Select("all='" + sql + "'");
-                    if (dr.Length > 0)
-                    {
-                        // Cpublic.log.Info("ssss:" + dr[0]["tno"].ToString());
-                        if (dr[0]["tno"].ToString() != "")
-                        {
-                            if (dr[0]["tno"].ToString() == "custom")
-                            {
-                                if (ActiveMdiChild != null)
-                                {
-                                    ActiveMdiChild.Close();
-                                }
-                                Alter f = new Alter();
-                                f.Activate();
-                                f.TopMost = true;
-                                f.ShowDialog();
-                                //  this.Invoke(new Action(() => { f.ShowDialog();}));
-                                //  
-                                if (Cpublic.tno != "" && Cpublic.tno != null)
-                                {
-                                    name += Cpublic.tno + "-";
-                                }
-                            }
-                            else
-                            {
-                                name += dr[0]["tno"].ToString() + "-";
-                            }
-                        }
-                    }
-                    Cpublic.log.Info(i + ":" + sql + ":" + dr.Length);
-                    i++;
-                }
-                if (name != "")
-                {
-                    try
-                    {
-                        name += s;
-                        name += e.FullPath.Substring(e.FullPath.LastIndexOf("."));
-                        //ThreadPool.QueueUserWorkItem(Worker, fsArgs);
-                        File.Move(e.FullPath, e.FullPath.Substring(0, e.FullPath.LastIndexOf("\\")) + "\\" + name);
-                    }
-                    catch (Exception ex)
-                    {
-                        text("重命名失败,文件可能被占用", 0xFF34B3);
-                        Cpublic.log.Error("重命名失败：" + ex.Message);
-                    }
-                }
-                else
-                {
-                    Cpublic.log.Info("当前路径下，重命名结果为空，若有异常请检查编码模板！ " + e.FullPath);
                 }
             }
-         }
-            public void text(string text)
-        {
+            catch (Exception ex)
+            {
+                Cpublic.log.Error("重命名失败！"+ex.Message);
+            }
+          }
+         public void text(string text)
+         {
             int x = mians.VerticalScroll.Value;
             Label checkBox = new Label
             {
@@ -578,6 +585,7 @@ namespace folder
                     DataRow[] dc;
                     dc = Data.Select(" tno <> ''");
                     MessageBox.Show("模板读取成功，共" + Data.Rows.Count + "行数据。含编号" + dc.Length + "个", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    end = 0;
                     Cpublic.log.Info("模板读取成功，共" + Data.Rows.Count + "行数据。含编号" + dc.Length + "个");
                 }
                 catch (Exception ex)
