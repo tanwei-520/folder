@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using NPOI.HSSF.UserModel;
-using Microsoft.VisualBasic;
+using System.Threading;
 namespace folder
 {
     public partial class MonitorFolder : Form
@@ -22,6 +22,8 @@ namespace folder
         private DataTable Data = new DataTable();//模板
         private string[] lie={"完整目录","目录名称","编号"};
         private DataTable Reomname = new DataTable();
+        private DataTable create = new DataTable();
+        private DataTable initialize = new DataTable();//初始化各目录文件数量
         public MonitorFolder()
         {
             InitializeComponent();
@@ -87,7 +89,7 @@ namespace folder
                 }
                 DataRow dr = list.NewRow();
                 dr["all"] = Gtext.Text;
-                dr["name"] = Name = Gtext.Text.Substring(Gtext.Text.LastIndexOf("\\") + 1);
+                dr["name"] =Gtext.Text.Substring(Gtext.Text.LastIndexOf("\\") + 1);
                 list.Rows.Add(dr);
                 Cpublic.log.Info(Gtext.Text.Substring(Gtext.Text.LastIndexOf("\\") + 1));
                 dibdad(Gtext.Text);
@@ -193,6 +195,28 @@ namespace folder
                 Cpublic.log.Error("未找到路径："+ dirs);
             }
         }
+        private void conuts(string dirs)//初始化数据
+        {
+            if (Directory.Exists(dirs))
+            {
+                //文件路径
+                string[] dir = Directory.GetDirectories(dirs);
+                //文件名
+                for (int i = 0; i < dir.Length; i++)
+                {
+                    DataRow dr = initialize.NewRow();
+                    dr["path"] = dir[i];
+                    dr["count"] =int.Parse(Directory.GetFiles(dir[i]).Length.ToString());
+                    initialize.Rows.Add(dr);
+                    Cpublic.log.Info(dir[i]+"--" + (int.Parse(Directory.GetFiles(dir[i]).Length.ToString())));
+                    conuts(dir[i]);
+                }
+            }
+            else
+            {
+                Cpublic.log.Error("未找到路径：" + dirs);
+            }
+        }
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -226,18 +250,41 @@ namespace folder
             }
             else
             {
-                if (end == 0)
+                if (end==0) 
                 {
+
                     Reomname.Columns.Add("path");
                     Reomname.Columns.Add("old");
                     Reomname.Columns.Add("new");
+                    create.Columns.Add("path");
+                    create.Columns.Add("name");
+                    initialize.Columns.Add("path");
+                    initialize.Columns.Add("count");
+                    text("开始初始化程序...");
+                    Cpublic.log.Info("开始初始化程序...");
+                    DataRow dr = initialize.NewRow();
+                    dr["path"] = Gtext.Text;
+                    dr["count"] = int.Parse(Directory.GetFiles(Gtext.Text).Length.ToString());
+                    initialize.Rows.Add(dr);
+                    conuts(Gtext.Text);
+                    if (initialize.Rows.Count<1)
+                    {
+                        Cpublic.log.Error("程序初始化失败！Count="+initialize.Rows.Count);
+                        text("程序初始化失败！", 0xFF0000);
+                        return;
+                    }
+                    else
+                    {
+                        Cpublic.log.Info("程序初始化成功！Count=" + initialize.Rows.Count);
+                        text("程序初始化成功！");
+                    }
                 }
                 end = 2;
                 run(a);
                 a++;
             }
         }
-        public void run(int a)
+        public void run(int a)//开始监听
         {
             try
             {
@@ -276,14 +323,11 @@ namespace folder
             text("重命名结果："+e.Name, 0x00CD00);
             Cpublic.log.Info("文件重命名：" + e.OldName);
             Cpublic.log.Info("重命名结果：" + e.Name);
-            if (end==2)
-            {
                 DataRow dr = Reomname.NewRow();
-                dr["path"] = e.FullPath.Substring(0,e.FullPath.LastIndexOf("\\")); ;
+                dr["path"] = e.FullPath.Substring(0,e.FullPath.LastIndexOf("\\")); 
                 dr["old"] = e.OldName.Substring(e.OldName.LastIndexOf("\\")+1);
                 dr["new"] = e.Name.Substring(e.Name.LastIndexOf("\\")+1);
                 Reomname.Rows.Add(dr);
-            }
             //WriteLine($"原名：{e.OldName}   新名称：{e.Name}");
         }
         private  void Fsw_Deleted(object sender, FileSystemEventArgs e)
@@ -301,31 +345,60 @@ namespace folder
         {
             text("创建文件：" + e.Name,0x4876FF);
             Cpublic.log.Info("创建文件：" + e.Name);
-            if (end==2)
+            DataRow d = create.NewRow();
+            d["path"] = e.FullPath.Substring(0, e.FullPath.LastIndexOf("\\"));
+            d["name"] = e.Name;
+            create.Rows.Add(d);
+            if (end == 2)
             {
-                string name="";
-                string name2 = "";
-                string[] sname = e.FullPath.Replace(Gtext.Text,"").Split("\\",StringSplitOptions.None);
-                for (int i=0;i<sname.Length-1;)
+                bool done = false;
+                DataRow[] fc;
+                fc = create.Select("path = '" + e.FullPath.Substring(0, e.FullPath.LastIndexOf("\\")) + "'");
+                DataRow[] fd;
+                fd = initialize.Select("path = '" + e.FullPath.Substring(0, e.FullPath.LastIndexOf("\\"))+"'");
+                if (fd.Length<1)
                 {
-                    DataRow[] dr ;
+                    Cpublic.log.Error("该路径数据未能初始化成功：" + e.FullPath.Substring(0, e.FullPath.LastIndexOf("\\")));
+                    DataRow ac = initialize.NewRow();
+                    ac["path"] = e.FullPath.Substring(0, e.FullPath.LastIndexOf("\\"));
+                    ac["count"] = 1;
+                    fd[0] = ac;
+                }
+                string s = (int.Parse(fd[0]["count"].ToString()) + int.Parse(fc.Length.ToString())).ToString();
+                s = s.PadLeft((5), '0');
+                Cpublic.log.Info("S:" + s);
+                do
+                {
+                    try
+                    {
+                        using (File.Open(e.FullPath, FileMode.Open)) { done = true; }
+                    }
+                    catch { done = false; Cpublic.log.Error("文件被占用"); }
+                    Thread.Sleep(1000);
+                } while (!done);
+                string name = "";
+                string name2 = "";
+                string[] sname = e.FullPath.Replace(Gtext.Text, "").Split("\\", StringSplitOptions.None);
+                for (int i = 0; i < sname.Length - 1;)
+                {
+                    DataRow[] dr;
                     string sql = "";
                     if (sname[i] == "")
                     {
-                        name2 +=sname[i];
+                        name2 += sname[i];
                         sql = "" + Gtext.Text + "" + name2 + "";
                     }
                     else
                     {
-                        name2 =name2+"\\"+sname[i];
+                        name2 = name2 + "\\" + sname[i];
                         sql = "" + Gtext.Text + "" + name2 + "";
                     }
-                    dr = Data.Select("all='"+ sql + "'");
+                    dr = Data.Select("all='" + sql + "'");
                     if (dr.Length > 0)
                     {
-                       // Cpublic.log.Info("ssss:" + dr[0]["tno"].ToString());
+                        // Cpublic.log.Info("ssss:" + dr[0]["tno"].ToString());
                         if (dr[0]["tno"].ToString() != "")
-                        {            
+                        {
                             if (dr[0]["tno"].ToString() == "custom")
                             {
                                 if (ActiveMdiChild != null)
@@ -347,36 +420,33 @@ namespace folder
                             {
                                 name += dr[0]["tno"].ToString() + "-";
                             }
-                        }                       
+                        }
                     }
-                    Cpublic.log.Info(i+":"+sql+":"+dr.Length);
+                    Cpublic.log.Info(i + ":" + sql + ":" + dr.Length);
                     i++;
                 }
-                if (name!="") 
+                if (name != "")
                 {
                     try
                     {
-                        string s = Directory.GetFiles(e.FullPath.Substring(0, e.FullPath.LastIndexOf("\\"))).Length.ToString();
-                        s = s.PadLeft((5), '0');
                         name += s;
                         name += e.FullPath.Substring(e.FullPath.LastIndexOf("."));
+                        //ThreadPool.QueueUserWorkItem(Worker, fsArgs);
                         File.Move(e.FullPath, e.FullPath.Substring(0, e.FullPath.LastIndexOf("\\")) + "\\" + name);
                     }
                     catch (Exception ex)
                     {
-                        text("重命名失败,文件可能被占用",0xFF34B3);
-                        Cpublic.log.Error("重命名失败："+ex.Message);
+                        text("重命名失败,文件可能被占用", 0xFF34B3);
+                        Cpublic.log.Error("重命名失败：" + ex.Message);
                     }
                 }
                 else
                 {
-                    Cpublic.log.Info("当前路径下，重命名结果为空，若有异常请检查编码模板！ "+e.FullPath);
+                    Cpublic.log.Info("当前路径下，重命名结果为空，若有异常请检查编码模板！ " + e.FullPath);
                 }
             }
-
-            // WriteLine($"{e.Name}  我被创建了");
-        }
-        public void text(string text)
+         }
+            public void text(string text)
         {
             int x = mians.VerticalScroll.Value;
             Label checkBox = new Label
@@ -506,7 +576,7 @@ namespace folder
                     }
                     fileStream.Close();
                     DataRow[] dc;
-                    dc = Data.Select("tno is not null or tno <>''");
+                    dc = Data.Select(" tno <> ''");
                     MessageBox.Show("模板读取成功，共" + Data.Rows.Count + "行数据。含编号" + dc.Length + "个", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Cpublic.log.Info("模板读取成功，共" + Data.Rows.Count + "行数据。含编号" + dc.Length + "个");
                 }
@@ -566,12 +636,12 @@ namespace folder
                                 }
                             }
                         }
-                        FileStream fss = new FileStream(@"" + Gtext.Text + "\\重命名记录.xlsx", FileMode.Create);
+                        FileStream fss = new FileStream(@"" + Gtext.Text + "\\重命名记录"+ DateTime.Now.Day.ToString()+ DateTime.Now.ToLongTimeString().ToString().Replace(":","")+".xlsx", FileMode.Create);
                         workbook.Write(fss);
                         fss.Close();
                         workbook.Close();
                         MessageBox.Show("生成成功，重命名记录放置在根目录下！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                        Cpublic.log.Info("重命名记录生成成功：" + Gtext.Text + "\\重命名记录.xlsx");
+                        Cpublic.log.Info("重命名记录生成成功：" + Gtext.Text + "\\重命名记录" + DateTime.Now.Day.ToString() + DateTime.Now.ToLongTimeString().ToString().Replace(":", "") + ".xlsx");
                     }
                     else
                     {

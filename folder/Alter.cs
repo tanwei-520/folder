@@ -13,6 +13,7 @@ namespace folder
         public Alter()
         {
             InitializeComponent();
+            this.TopMost = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -32,7 +33,7 @@ namespace folder
             if (textBox1.Text=="")
             {
                 MessageBox.Show("编号为空！","警告",MessageBoxButtons.OK,MessageBoxIcon.Warning);
-                e.Cancel = false;
+                e.Cancel = true;
             }
         }
     }
