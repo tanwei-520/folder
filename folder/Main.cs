@@ -127,5 +127,18 @@ namespace folder
                 this.TopMost = true;
             }
         }
+
+        private void 批量重命名ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+            {
+                ActiveMdiChild.Close();
+            }
+            Remname f = new Remname
+            {
+                MdiParent = this
+            };
+            f.Show();
+        }
     }
 }
