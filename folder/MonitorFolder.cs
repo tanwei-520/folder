@@ -18,6 +18,7 @@ namespace folder
         private static int y = 11;
         private int end = 0;//记录标记
         public static int a = 0;
+        private int length;
         private DataTable list = new DataTable();//目录清单
         private DataTable Data = new DataTable();//模板
         private string[] lie={"完整目录","目录名称","编号"};
@@ -276,9 +277,25 @@ namespace folder
             }
             else
             {
+                try
+                {
+                    length = int.Parse(num.Value.ToString());
+                    if (length > 8||length< 1 )
+                    {
+                        MessageBox.Show("流水号范围不在限制范围内(1-8)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        Cpublic.log.Error("流水号范围不在限制范围内(1-8)：当前值" + length.ToString());
+                        return;
+                    }
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show("流水号格式输入错误，请输入数字(1-8)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Cpublic.log.Error("流水号格式输入错误，请输入数字(1-8)：当前值" + length.ToString());
+                    Cpublic.log.Error("流水号转换失败：" + ex.Message);
+                    return;
+                }
                 if (end==0) 
                 {
-
                     Reomname.Columns.Add("path");
                     Reomname.Columns.Add("old");
                     Reomname.Columns.Add("new");
@@ -393,7 +410,7 @@ namespace folder
                         fd[0] = ac;
                     }
                     string s = (int.Parse(fd[0]["count"].ToString()) + int.Parse(fc.Length.ToString())).ToString();
-                    s = s.PadLeft((5), '0');
+                    s = s.PadLeft((length), '0');
                     Cpublic.log.Info("S:" + s);
                     do
                     {
@@ -458,7 +475,7 @@ namespace folder
                         try
                         {
                             name += s;
-                            Cpublic.log.Info(e.FullPath.LastIndexOf("\\") + 1);
+                           // Cpublic.log.Info(e.FullPath.LastIndexOf("\\") + 1);
                             name =name+"_"+ e.FullPath.Substring(e.FullPath.LastIndexOf("\\")+1,e.FullPath.Length - e.FullPath.LastIndexOf("\\")-1);
                             // name += e.FullPath.Substring(e.FullPath.LastIndexOf("."));
                             //ThreadPool.QueueUserWorkItem(Worker, fsArgs);

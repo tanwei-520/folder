@@ -45,7 +45,10 @@ namespace folder
             this.button6 = new System.Windows.Forms.Button();
             this.Btext = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.num = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num)).BeginInit();
             this.SuspendLayout();
             // 
             // button3
@@ -190,11 +193,44 @@ namespace folder
             this.label4.TabIndex = 22;
             this.label4.Text = "引用编码对照表";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(684, 162);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(68, 17);
+            this.label5.TabIndex = 25;
+            this.label5.Text = "流水号位数";
+            // 
+            // num
+            // 
+            this.num.Location = new System.Drawing.Point(758, 157);
+            this.num.Maximum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.num.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.num.Name = "num";
+            this.num.Size = new System.Drawing.Size(70, 23);
+            this.num.TabIndex = 26;
+            this.num.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
             // MonitorFolder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(971, 576);
+            this.Controls.Add(this.num);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.Btext);
             this.Controls.Add(this.label4);
@@ -218,6 +254,7 @@ namespace folder
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MonitorFolder_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -239,5 +276,7 @@ namespace folder
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.TextBox Btext;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown num;
     }
 }
