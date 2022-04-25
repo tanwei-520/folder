@@ -42,12 +42,15 @@ namespace folder
             this.button5 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.button6 = new System.Windows.Forms.Button();
+            this.Btext = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(447, 127);
+            this.button3.Location = new System.Drawing.Point(466, 153);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(67, 27);
             this.button3.TabIndex = 16;
@@ -120,7 +123,7 @@ namespace folder
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(327, 127);
+            this.button4.Location = new System.Drawing.Point(346, 153);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(67, 27);
             this.button4.TabIndex = 18;
@@ -130,7 +133,7 @@ namespace folder
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(561, 127);
+            this.button5.Location = new System.Drawing.Point(580, 153);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(67, 27);
             this.button5.TabIndex = 19;
@@ -142,7 +145,7 @@ namespace folder
             // 
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(897, 142);
+            this.pictureBox1.Location = new System.Drawing.Point(897, 144);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(45, 38);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -160,11 +163,41 @@ namespace folder
             this.label3.TabIndex = 21;
             this.label3.Text = "不要打开或占用需要重命名的文件";
             // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(866, 113);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(67, 27);
+            this.button6.TabIndex = 24;
+            this.button6.Text = "浏览";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // Btext
+            // 
+            this.Btext.Location = new System.Drawing.Point(143, 115);
+            this.Btext.Name = "Btext";
+            this.Btext.ReadOnly = true;
+            this.Btext.Size = new System.Drawing.Size(685, 23);
+            this.Btext.TabIndex = 23;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(33, 118);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(92, 17);
+            this.label4.TabIndex = 22;
+            this.label4.Text = "引用编码对照表";
+            // 
             // MonitorFolder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(971, 576);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.Btext);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button5);
@@ -203,5 +236,8 @@ namespace folder
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.TextBox Btext;
+        private System.Windows.Forms.Label label4;
     }
 }

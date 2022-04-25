@@ -23,6 +23,7 @@ namespace folder
         private string[] lie={"完整目录","目录名称","编号"};
         private DataTable Reomname = new DataTable();
         private DataTable create = new DataTable();
+        private DataTable Duiz = new DataTable();
         private DataTable initialize = new DataTable();//初始化各目录文件数量
         public MonitorFolder()
         {
@@ -56,19 +57,6 @@ namespace folder
 
         private void button4_Click(object sender, EventArgs e)
         {
-            /*            if (Directory.Exists(Gtext.Text))
-                        {
-                            //文件路径
-                            string[] dir = Directory.GetDirectories(Gtext.Text);
-                            //文件名
-                            Cpublic.log.Info(dir);
-                        }
-                        else
-                        {
-                            Cpublic.log.Error("未找到路径");
-                        }
-                        director(Gtext.Text);
-                        Cpublic.log.Info(list);*/
             if (Gtext.Text == "")
             {
                 MessageBox.Show("根目录为空！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -93,20 +81,56 @@ namespace folder
                 list.Rows.Add(dr);
                 Cpublic.log.Info(Gtext.Text.Substring(Gtext.Text.LastIndexOf("\\") + 1));
                 dibdad(Gtext.Text);
+                DataTable ac = new DataTable();
+                if (Duiz.Rows.Count>0)
+                {                 
+                    ac.Columns.Add("all");
+                    ac.Columns.Add("name");
+                    ac.Columns.Add("tno");
+                    for (int i = 0; i < list.Rows.Count; i++)
+                    {
+                        DataRow dc = ac.NewRow();
+                        for (int t = 0; t < list.Columns.Count; t++)
+                        {
+                            dc[t] = list.Rows[i][t].ToString();
+                        }
+                        DataRow[] po;
+                        po = Duiz.Select("name ='" + dc[1] + "'");
+                        if (po.Length > 0)
+                        {
+                            dc[2] = po[0]["tno"].ToString();
+                        }
+                        else
+                        {
+                            dc[2] = "";
+                        }
+                        ac.Rows.Add(dc);
+                    }
+                }
+                else
+                {
+                    ac = list;
+                    if (!ac.Columns.Contains("tno"))
+                    {
+                        ac.Columns.Add("tno");
+                    }
+                    MessageBox.Show("对照表记录为空生成的清单中不会包含对应编码！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    Cpublic.log.Info("对照表记录为空生成的清单中不会包含对应编码！");
+                }
                 //Cpublic.log.Info(list);
                 if (Gtext.Text != "")
                 {
-                    Cpublic.log.Info("开始生成清单EXCEL");
-                    if (list.Rows.Count > 0)
+                    Cpublic.log.Info("开始生成目录清单EXCEL");
+                    if (ac.Rows.Count > 0)
                     {
                         XSSFWorkbook workbook = new XSSFWorkbook();
                         workbook.CreateSheet("sheet1");
                         XSSFSheet sheet = (XSSFSheet)workbook.GetSheet("sheet1");
-                        for (int h = 0; h < list.Rows.Count + 1; h++)
+                        for (int h = 0; h < ac.Rows.Count + 1; h++)
                             sheet.CreateRow(h);
                         XSSFRow sheetrow = (XSSFRow)sheet.GetRow(0);
                         XSSFCell[] sheetcell = new XSSFCell[list.Columns.Count + 1];
-                        for (int i = 0; i < list.Columns.Count + 1; i++)
+                        for (int i = 0; i < ac.Columns.Count; i++)
                         {
                             sheetcell[i] = (XSSFCell)sheetrow.CreateCell(i);
                             sheet.SetColumnWidth(i, 18 * 386);
@@ -114,15 +138,15 @@ namespace folder
                         sheetcell[0].SetCellValue("完整目录");
                         sheetcell[1].SetCellValue("目录名称");
                         sheetcell[2].SetCellValue("编号");
-                        for (int i = 0; i < list.Rows.Count; i++)
+                        for (int i = 0; i < ac.Rows.Count; i++)
                         {
                             sheetrow = (XSSFRow)sheet.GetRow(i + 1);
-                            for (int t = 0; t < list.Columns.Count; t++)
+                            for (int t = 0; t < ac.Columns.Count; t++)
                             {
                                 sheetcell[t] = (XSSFCell)sheetrow.CreateCell(t);
-                                if (list.Rows[i][t] != null || list.Rows[i][t].ToString() == "")
+                                if (ac.Rows[i][t] != null || ac.Rows[i][t].ToString() == "")
                                 {
-                                    sheetcell[t].SetCellValue(list.Rows[i][t].ToString());
+                                    sheetcell[t].SetCellValue(ac.Rows[i][t].ToString());
                                 }
                                 else
                                 {
@@ -136,6 +160,8 @@ namespace folder
                         workbook.Close();
                         MessageBox.Show("生成成功，目录清单放置在根目录下！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         Cpublic.log.Info("清单生成成功：" + Gtext.Text + "\\目录清单.xlsx");
+                        text("清单生成成功");
+                        list.Clear();
                     }
                 }
                 else
@@ -312,7 +338,7 @@ namespace folder
             }
             catch(Exception ex)
             {
-                MessageBox.Show("未能成功启动监听程序！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("未能成功启动监听程序！详情请查看日志！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Cpublic.log.Error("未能成功启动监听程序："+ex.Message);
             }
         }
@@ -432,9 +458,19 @@ namespace folder
                         try
                         {
                             name += s;
-                            name += e.FullPath.Substring(e.FullPath.LastIndexOf("."));
+                            Cpublic.log.Info(e.FullPath.LastIndexOf("\\") + 1);
+                            name =name+"_"+ e.FullPath.Substring(e.FullPath.LastIndexOf("\\")+1,e.FullPath.Length - e.FullPath.LastIndexOf("\\")-1);
+                            // name += e.FullPath.Substring(e.FullPath.LastIndexOf("."));
                             //ThreadPool.QueueUserWorkItem(Worker, fsArgs);
-                            File.Move(e.FullPath, e.FullPath.Substring(0, e.FullPath.LastIndexOf("\\")) + "\\" + name);
+                            if (!File.Exists(e.FullPath.Substring(0, e.FullPath.LastIndexOf("\\")) + "\\" + name))
+                            {
+                                File.Move(e.FullPath, e.FullPath.Substring(0, e.FullPath.LastIndexOf("\\")) + "\\" + name);
+                            }
+                            else
+                            {
+                                text("重命名失败,当前路径下存在该文件："+ e.FullPath.Substring(0, e.FullPath.LastIndexOf("\\")) + "\\" + name, 0xFF34B3);
+                                Cpublic.log.Error("重命名失败,当前路径下存在该文件：" + e.FullPath.Substring(0, e.FullPath.LastIndexOf("\\")) + "\\" + name);
+                            }
                         }
                         catch (Exception ex)
                         {
@@ -557,7 +593,7 @@ namespace folder
                         }
                         else
                         {
-                            MessageBox.Show("选择的模板格式验证失败！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("选择的模板格式验证失败！详情请查看日志！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             Cpublic.log.Info("模板列名验证错误：" + row.GetCell(i).ToString());
                             return;
                         }
@@ -587,11 +623,13 @@ namespace folder
                     MessageBox.Show("模板读取成功，共" + Data.Rows.Count + "行数据。含编号" + dc.Length + "个", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     end = 0;
                     Cpublic.log.Info("模板读取成功，共" + Data.Rows.Count + "行数据。含编号" + dc.Length + "个");
+                    text("模板读取成功");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("模板读取错误！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("模板读取错误！详情请查看日志！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     Cpublic.log.Error("模板读取错误！"+ex.Message);
+                    text("模板读取失败", 0xFF34B3);
                 }
             }
         }
@@ -660,8 +698,102 @@ namespace folder
             }
             catch (Exception ex)
             {
-                MessageBox.Show("重命名记录生成失败！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("重命名记录生成失败！详情请查看日志。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Cpublic.log.Error("重命名记录生成失败！" + ex.Message);
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog
+            {
+                Multiselect = false,
+                Title = "请选择文件", //选择器提示文字
+                Filter = "Excel(*.xlsx,*.xls)|*.xlsx;*.xls" //文件类型
+            };
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                if (string.IsNullOrEmpty(fileDialog.FileName))
+                {
+                    MessageBox.Show("文件路径不能为空！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Cpublic.log.Error("文件路径不能为空！");
+                    return;
+                }
+                Btext.Text = fileDialog.FileName;
+                if (Btext.Text == "")
+                {
+                    MessageBox.Show("对照表目录为空！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Cpublic.log.Error("对照表目录为空");
+                    return;
+                }
+                try
+                {
+                    text("开始读取对照表");
+                    Cpublic.log.Info("开始读取对照表： " + Btext.Text);
+                    DataTable Data = new DataTable();
+                    Duiz.Clear();
+                    if (!Duiz.Columns.Contains("name"))
+                    {
+                        Duiz.Columns.Add("name");
+                    }
+                    if (!Duiz.Columns.Contains("tno"))
+                    {
+                        Duiz.Columns.Add("tno");
+                    }
+                    FileStream fileStream = new FileStream(@"" + Btext.Text + "", FileMode.Open);
+                    IWorkbook workbook;
+                    if (Btext.Text.LastIndexOf(".xlsx") > 0)
+                    {
+                        workbook = new XSSFWorkbook(fileStream);
+                    }
+                    else
+                    {
+                        workbook = new HSSFWorkbook(fileStream);
+                    }
+                    ISheet sheet = workbook.GetSheetAt(0);
+                    IRow row;
+                    row = sheet.GetRow(0);
+                    for (int i = 1; i < lie.Length; i++)
+                    {
+                        if (lie[i] == row.GetCell(i-1).ToString())
+                        {
+                            Cpublic.log.Info("对照表列名验证正确：" + row.GetCell(i-1).ToString());
+                        }
+                        else
+                        {
+                            MessageBox.Show("选择的对照表格式验证失败！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            Cpublic.log.Info("对照表列名验证错误：" + lie[i].ToString());
+                            return;
+                        }
+                    }
+                    for (int i = 1; i < sheet.LastRowNum + 1; i++)
+                    {
+                        row = sheet.GetRow(i);
+                        DataRow dr = Duiz.NewRow();
+                        for (int t = row.FirstCellNum; t < row.LastCellNum; t++)
+                        {
+                            if (row.GetCell(t) != null && row.GetCell(t).ToString() != "")
+                            {
+                                dr[t] = row.GetCell(t).ToString();
+                            }
+                            else
+                            {
+                                dr[t] = "";
+                            }
+                            // Cpublic.log.Info(dr[t] = row.GetCell(t).ToString());
+                        }
+                        Duiz.Rows.Add(dr);
+                    }
+                    fileStream.Close();
+                    MessageBox.Show("对照表读取成功，共" + Duiz.Rows.Count + "行数据。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Cpublic.log.Info("对照表读取成功，共" + Duiz.Rows.Count + "行数据。");
+                    text("对照表读取成功。");
+                }
+                catch (Exception ex)
+                {
+                    Cpublic.log.Error("对照表读取失败："+ex.Message);
+                    MessageBox.Show("对照表读取失败,详情请查看日志！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
         }
     }
