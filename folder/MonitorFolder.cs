@@ -213,13 +213,14 @@ namespace folder
                     dr["all"] = dir[i];
                     dr["name"] = dir[i].Replace(dirs + "\\", "");
                     list.Rows.Add(dr);
-                    Cpublic.log.Info(dir[i].Replace(dirs + "\\", "")+"  "+i);
+                    //Cpublic.log.Info(dir[i]+"，已插入");
                     dibdad(dir[i]);
                 }
             }
             else
             {
-                Cpublic.log.Error("未找到路径："+ dirs);
+                text("路径有误：" + dirs, 0xFF0000);
+                Cpublic.log.Error("路径有误：" + dirs);
             }
         }
         private void conuts(string dirs)//初始化数据
@@ -241,7 +242,8 @@ namespace folder
             }
             else
             {
-                Cpublic.log.Error("未找到路径：" + dirs);
+                text("路径有误：" + dirs, 0xFF0000);
+                Cpublic.log.Error("路径有误：" + dirs);
             }
         }
 

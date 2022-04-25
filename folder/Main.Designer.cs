@@ -34,12 +34,13 @@ namespace folder
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.批量新建文件夹ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.监听文件夹ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.批量重命名ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.生成文件清单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.显示程序ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.保持最前ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.退出程序ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.批量重命名ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -49,7 +50,8 @@ namespace folder
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.批量新建文件夹ToolStripMenuItem,
             this.监听文件夹ToolStripMenuItem,
-            this.批量重命名ToolStripMenuItem});
+            this.批量重命名ToolStripMenuItem,
+            this.生成文件清单ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -72,6 +74,22 @@ namespace folder
             this.监听文件夹ToolStripMenuItem.Size = new System.Drawing.Size(96, 21);
             this.监听文件夹ToolStripMenuItem.Text = "监听文件夹";
             this.监听文件夹ToolStripMenuItem.Click += new System.EventHandler(this.监听文件夹ToolStripMenuItem_Click);
+            // 
+            // 批量重命名ToolStripMenuItem
+            // 
+            this.批量重命名ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("批量重命名ToolStripMenuItem.Image")));
+            this.批量重命名ToolStripMenuItem.Name = "批量重命名ToolStripMenuItem";
+            this.批量重命名ToolStripMenuItem.Size = new System.Drawing.Size(120, 21);
+            this.批量重命名ToolStripMenuItem.Text = "批量重命名文件";
+            this.批量重命名ToolStripMenuItem.Click += new System.EventHandler(this.批量重命名ToolStripMenuItem_Click);
+            // 
+            // 生成文件清单ToolStripMenuItem
+            // 
+            this.生成文件清单ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("生成文件清单ToolStripMenuItem.Image")));
+            this.生成文件清单ToolStripMenuItem.Name = "生成文件清单ToolStripMenuItem";
+            this.生成文件清单ToolStripMenuItem.Size = new System.Drawing.Size(108, 21);
+            this.生成文件清单ToolStripMenuItem.Text = "生成文件清单";
+            this.生成文件清单ToolStripMenuItem.Click += new System.EventHandler(this.生成文件清单ToolStripMenuItem_Click);
             // 
             // notifyIcon1
             // 
@@ -112,14 +130,6 @@ namespace folder
             this.退出程序ToolStripMenuItem1.Text = "退出程序";
             this.退出程序ToolStripMenuItem1.Click += new System.EventHandler(this.退出程序ToolStripMenuItem1_Click);
             // 
-            // 批量重命名ToolStripMenuItem
-            // 
-            this.批量重命名ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("批量重命名ToolStripMenuItem.Image")));
-            this.批量重命名ToolStripMenuItem.Name = "批量重命名ToolStripMenuItem";
-            this.批量重命名ToolStripMenuItem.Size = new System.Drawing.Size(120, 21);
-            this.批量重命名ToolStripMenuItem.Text = "批量重命名文件";
-            this.批量重命名ToolStripMenuItem.Click += new System.EventHandler(this.批量重命名ToolStripMenuItem_Click);
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -159,6 +169,7 @@ namespace folder
         private System.Windows.Forms.ToolStripMenuItem 保持最前ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 退出程序ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 批量重命名ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 生成文件清单ToolStripMenuItem;
     }
 }
 

@@ -140,5 +140,18 @@ namespace folder
             };
             f.Show();
         }
+
+        private void 生成文件清单ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+            {
+                ActiveMdiChild.Close();
+            }
+            Inventory f = new Inventory
+            {
+                MdiParent = this
+            };
+            f.Show();
+        }
     }
 }
