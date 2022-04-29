@@ -282,6 +282,18 @@ namespace folder
                 try
                 {
                     length = int.Parse(num.Value.ToString());
+                    try
+                    {
+                        Properties.Settings.Default.tno = length;
+                        Properties.Settings.Default.Save();
+                        Cpublic.log.Info("流水号写入程序初始化：当前值" + length.ToString());
+                    }
+                    catch(Exception ex)
+                    {
+                        Properties.Settings.Default.tno = 5;
+                        Properties.Settings.Default.Save();
+                        Cpublic.log.Info("流水号写入程序初始化失败，将重置为5! " + ex.Message);
+                    }
                     if (length > 8||length< 1 )
                     {
                         MessageBox.Show("流水号范围不在限制范围内(1-8)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -541,6 +553,7 @@ namespace folder
         private void MonitorFolder_Load(object sender, EventArgs e)
         {
             CheckForIllegalCrossThreadCalls = false;
+            num.Value = Properties.Settings.Default.tno;
         }
 
         private void button5_Click(object sender, EventArgs e)

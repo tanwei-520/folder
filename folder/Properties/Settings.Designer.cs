@@ -22,5 +22,17 @@ namespace folder.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public int tno {
+            get {
+                return ((int)(this["tno"]));
+            }
+            set {
+                this["tno"] = value;
+            }
+        }
     }
 }

@@ -73,8 +73,8 @@ namespace folder
                 DirectoryInfo Files = new DirectoryInfo(Gtext.Text);
                 FileInfo[] files = Files.GetFiles();
                 var filtered = files.Where(f => !f.Attributes.HasFlag(FileAttributes.Hidden));//去除隐藏文件
-                Cpublic.log.Info(Gtext.Text + "开始遍历");
-                text(Gtext.Text + "开始遍历");
+                Cpublic.log.Info(Gtext.Text + "，开始遍历");
+                text(Gtext.Text + "，开始遍历");
                 foreach (FileInfo Filename in filtered)
                 {
                     DataRow dr = list.NewRow();
@@ -155,8 +155,8 @@ namespace folder
                         dr["fname"] = Filename.Name;
                         list.Rows.Add(dr);
                     }
-                    Cpublic.log.Info(dir[i] + "开始遍历");
-                    text(dir[i] + "开始遍历");
+                    Cpublic.log.Info(dir[i] + "，开始遍历");
+                    text(dir[i] + "，开始遍历");
                     dibdad(dir[i]);
                 }
             }
