@@ -70,6 +70,7 @@ namespace folder
                 {
                     list.Columns.Add("fname");
                 }
+                list.Clear();
                 DirectoryInfo Files = new DirectoryInfo(Gtext.Text);
                 FileInfo[] files = Files.GetFiles();
                 var filtered = files.Where(f => !f.Attributes.HasFlag(FileAttributes.Hidden));//去除隐藏文件
@@ -144,6 +145,10 @@ namespace folder
                 //文件名
                 for (int i = 0; i < dir.Length; i++)
                 {
+                    if ((new FileInfo(dir[i]).Attributes & FileAttributes.Hidden) == FileAttributes.Hidden)//去除隐藏文件夹
+                    {
+                        continue;
+                    };
                     DirectoryInfo Files = new DirectoryInfo(dir[i]);
                     FileInfo[] files = Files.GetFiles();
                     var filtered = files.Where(f => !f.Attributes.HasFlag(FileAttributes.Hidden));//去除隐藏文件
@@ -179,6 +184,7 @@ namespace folder
             //   mians.Controls.Add(checkBox);
             this.Invoke(new Action(() => { mians.Controls.Add(checkBox); }));
             y += 25;
+            checkBox.Dispose();
         }
         public void text(string text, int coloer)
         {
@@ -194,6 +200,7 @@ namespace folder
             //mians.Controls.Add(checkBox);
             this.Invoke(new Action(() => { mians.Controls.Add(checkBox); }));
             y += 25;
+           // checkBox.Dispose();
         }
     }
 }

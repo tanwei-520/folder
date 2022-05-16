@@ -209,6 +209,10 @@ namespace folder
                 //文件名
                 for (int i=0;i<dir.Length; i++)
                 {
+                    if ((new FileInfo(dir[i]).Attributes & FileAttributes.Hidden) == FileAttributes.Hidden)//去除隐藏文件夹
+                    {
+                        continue;
+                    };
                     DataRow dr = list.NewRow();
                     dr["all"] = dir[i];
                     dr["name"] = dir[i].Replace(dirs + "\\", "");
@@ -232,6 +236,10 @@ namespace folder
                 //文件名
                 for (int i = 0; i < dir.Length; i++)
                 {
+                    if ((new FileInfo(dir[i]).Attributes & FileAttributes.Hidden) == FileAttributes.Hidden)//去除隐藏文件夹
+                    {
+                        continue;
+                    };
                     DataRow dr = initialize.NewRow();
                     dr["path"] = dir[i];
                     dr["count"] =int.Parse(Directory.GetFiles(dir[i]).Length.ToString());
