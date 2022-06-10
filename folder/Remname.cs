@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using System.Linq;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using NPOI.HSSF.UserModel;
@@ -125,7 +126,6 @@ namespace folder
                             try
                             {
                                 File.Move(Data.Rows[i]["old"].ToString(), Data.Rows[i]["new"].ToString());
-                                text("重命名成功：" + Data.Rows[i]["new"].ToString());
                                 Cpublic.log.Info("成功重命名文件：" + Data.Rows[i]["old"].ToString() + "---" + Data.Rows[i]["new"].ToString());
                                 s++;
                             }
@@ -184,6 +184,49 @@ namespace folder
             //mians.Controls.Add(checkBox);
             this.Invoke(new Action(() => { mians.Controls.Add(checkBox); }));
             y += 25;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            dialog.Description = "请选择文件夹";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                if (string.IsNullOrEmpty(dialog.SelectedPath))
+                {
+                    MessageBox.Show(this, "文件夹路径不能为空", "提示");
+                    return;
+                }
+                textBox1.Text = dialog.SelectedPath; //获取文件夹路径 
+                Cpublic.log.Info("选择文件夹：" + dialog.SelectedPath);
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if (textBox1.Text == ""||only.Text=="")
+            {
+                MessageBox.Show("路径或后缀名为空！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            Cpublic.log.Info("开始修改文件后缀名");
+            DirectoryInfo Files = new DirectoryInfo(textBox1.Text);
+            FileInfo[] files = Files.GetFiles();
+            var filtered = files.Where(f => !f.Attributes.HasFlag(FileAttributes.Hidden));//去除隐藏文件
+            foreach (FileInfo Filename in filtered)
+            {
+                try
+                {
+                    File.Move(Filename.FullName, Filename.FullName.Replace(Filename.FullName.Substring(Filename.FullName.IndexOf(".")), only.Text));
+                    Cpublic.log.Info("成功修改文件>>：" + Filename.Name);
+                }
+                catch (Exception ex)
+                {
+                    text("重命名失败：" + Filename.FullName, 0xFF0000);
+                    Cpublic.log.Error("重命名失败：" + Filename.FullName+""+ex.Message);
+                }
+            }
+            MessageBox.Show("重命名完成！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

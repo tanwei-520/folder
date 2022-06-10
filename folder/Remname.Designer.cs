@@ -35,6 +35,12 @@ namespace folder
             this.button3 = new System.Windows.Forms.Button();
             this.mians = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.only = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button2
@@ -66,7 +72,7 @@ namespace folder
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(440, 72);
+            this.button3.Location = new System.Drawing.Point(440, 65);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(85, 27);
             this.button3.TabIndex = 18;
@@ -78,26 +84,85 @@ namespace folder
             // 
             this.mians.AutoScroll = true;
             this.mians.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.mians.Location = new System.Drawing.Point(12, 119);
+            this.mians.Location = new System.Drawing.Point(12, 162);
             this.mians.Name = "mians";
-            this.mians.Size = new System.Drawing.Size(947, 433);
+            this.mians.Size = new System.Drawing.Size(947, 390);
             this.mians.TabIndex = 19;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(12, 99);
+            this.label1.Location = new System.Drawing.Point(12, 142);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(212, 17);
             this.label1.TabIndex = 20;
             this.label1.Text = "不要打开或占用需要批量重命名的文件";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 80);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(104, 17);
+            this.label3.TabIndex = 21;
+            this.label3.Text = "仅修改文件后缀名";
+            // 
+            // only
+            // 
+            this.only.Location = new System.Drawing.Point(754, 101);
+            this.only.Name = "only";
+            this.only.Size = new System.Drawing.Size(100, 23);
+            this.only.TabIndex = 22;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(90, 101);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(627, 23);
+            this.textBox1.TabIndex = 24;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(440, 130);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(85, 27);
+            this.button1.TabIndex = 25;
+            this.button1.Text = "开始重命名";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(892, 99);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(67, 27);
+            this.button4.TabIndex = 26;
+            this.button4.Text = "浏览";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(754, 81);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(44, 17);
+            this.label4.TabIndex = 27;
+            this.label4.Text = "后缀名";
             // 
             // Remname
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(971, 576);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.only);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.mians);
             this.Controls.Add(this.button3);
@@ -121,5 +186,11 @@ namespace folder
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Panel mians;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox only;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Label label4;
     }
 }
