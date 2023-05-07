@@ -12,7 +12,7 @@
     <FileVersion>3.0.0.0</FileVersion>
     <Authors>Folder</Authors>
     <Copyright>© TW-Folder.All Rights Reserved</Copyright>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>123.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 

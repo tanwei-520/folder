@@ -32,6 +32,7 @@ namespace folder
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MonitorFolder));
             this.button3 = new System.Windows.Forms.Button();
             this.mians = new System.Windows.Forms.Panel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.button2 = new System.Windows.Forms.Button();
             this.Mtext = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -47,13 +48,15 @@ namespace folder
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.num = new System.Windows.Forms.NumericUpDown();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num)).BeginInit();
             this.SuspendLayout();
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(466, 153);
+            this.button3.Location = new System.Drawing.Point(472, 152);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(67, 27);
             this.button3.TabIndex = 16;
@@ -69,6 +72,18 @@ namespace folder
             this.mians.Name = "mians";
             this.mians.Size = new System.Drawing.Size(900, 370);
             this.mians.TabIndex = 15;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(923, 185);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(19, 24);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 0;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // button2
             // 
@@ -126,7 +141,7 @@ namespace folder
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(346, 153);
+            this.button4.Location = new System.Drawing.Point(361, 152);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(67, 27);
             this.button4.TabIndex = 18;
@@ -136,7 +151,7 @@ namespace folder
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(580, 153);
+            this.button5.Location = new System.Drawing.Point(580, 152);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(67, 27);
             this.button5.TabIndex = 19;
@@ -224,11 +239,23 @@ namespace folder
             0,
             0});
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(236, 161);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(99, 21);
+            this.checkBox1.TabIndex = 27;
+            this.checkBox1.Text = "拼接原文件名";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // MonitorFolder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(971, 576);
+            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.num);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button6);
@@ -239,13 +266,13 @@ namespace folder
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.mians);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.Mtext);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.Gtext);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.mians);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(987, 615);
             this.Name = "MonitorFolder";
@@ -253,6 +280,7 @@ namespace folder
             this.Text = "监听文件夹";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MonitorFolder_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num)).EndInit();
             this.ResumeLayout(false);
@@ -278,5 +306,7 @@ namespace folder
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown num;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }

@@ -16,7 +16,7 @@ namespace folder
     {
         public FileSystemWatcher fsw = new FileSystemWatcher();
         private static int y = 11;
-        private int end = 0;//记录标记
+        private int end = 0;//记录标记 1 未读取模板 2读取模板将进行重命名
         public static int a = 0;
         private int length;
         private DataTable list = new DataTable();//目录清单
@@ -384,8 +384,8 @@ namespace folder
 
         private  void Fsw_Renamed(object sender, RenamedEventArgs e)
         {
-            text("文件重命名："+e.OldName, 0x00CD00);
-            text("重命名结果："+e.Name, 0x00CD00);
+            text("文件重命名："+e.OldName, 0x008B00);
+            text("重命名结果："+e.Name, 0x008B00);
             Cpublic.log.Info("文件重命名：" + e.OldName);
             Cpublic.log.Info("重命名结果：" + e.Name);
                 DataRow dr = Reomname.NewRow();
@@ -408,7 +408,7 @@ namespace folder
         }*/
         private  void Fsw_Created(object sender, FileSystemEventArgs e)
         {
-            text("创建文件：" + e.Name,0x4876FF);
+            text("创建文件：" + e.Name,0x1C86EE);
             Cpublic.log.Info("创建文件：" + e.Name);
             try
             {
@@ -431,9 +431,6 @@ namespace folder
                         ac["count"] = 1;
                         fd[0] = ac;
                     }
-                    string s = (int.Parse(fd[0]["count"].ToString()) + int.Parse(fc.Length.ToString())).ToString();
-                    s = s.PadLeft((length), '0');
-                    Cpublic.log.Info("S:" + s);
                     do
                     {
                         try
@@ -446,7 +443,7 @@ namespace folder
                     string name = "";
                     string name2 = "";
                     string[] sname = e.FullPath.Replace(Gtext.Text, "").Split("\\", StringSplitOptions.None);
-                    for (int i = 0; i < sname.Length - 1;)
+                    for (int i = 0; i < sname.Length - 1;)//通过路径和编码表拼接文件名称
                     {
                         DataRow[] dr;
                         string sql = "";
@@ -496,9 +493,19 @@ namespace folder
                     {
                         try
                         {
+                            string s = (int.Parse(fd[0]["count"].ToString()) + int.Parse(fc.Length.ToString())).ToString();
+                            s = s.PadLeft((length), '0');
+                            //Cpublic.log.Info("S:" + s);打印流水号
                             name += s;
-                           // Cpublic.log.Info(e.FullPath.LastIndexOf("\\") + 1);
-                            name =name+"_"+ e.FullPath.Substring(e.FullPath.LastIndexOf("\\")+1,e.FullPath.Length - e.FullPath.LastIndexOf("\\")-1);
+                            // Cpublic.log.Info(e.FullPath.LastIndexOf("\\") + 1);
+                            if (checkBox1.Checked == true)
+                            {
+                                name = e.Name.Substring(0,e.Name.LastIndexOf(".")-1) + "_" + name+ e.Name.Substring(e.Name.LastIndexOf("."));
+                            }
+                            else
+                            {
+                                name += e.Name.Substring(e.Name.LastIndexOf("."));
+                            }
                             // name += e.FullPath.Substring(e.FullPath.LastIndexOf("."));
                             //ThreadPool.QueueUserWorkItem(Worker, fsArgs);
                             if (!File.Exists(e.FullPath.Substring(0, e.FullPath.LastIndexOf("\\")) + "\\" + name))
@@ -835,6 +842,12 @@ namespace folder
                     MessageBox.Show("对照表读取失败,详情请查看日志！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            mians.Controls.Clear();
+            y = 11;
         }
     }
 }
