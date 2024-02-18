@@ -318,13 +318,6 @@ namespace folder
                 }
                 if (end==0) 
                 {
-                    Reomname.Columns.Add("path");
-                    Reomname.Columns.Add("old");
-                    Reomname.Columns.Add("new");
-                    create.Columns.Add("path");
-                    create.Columns.Add("name");
-                    initialize.Columns.Add("path");
-                    initialize.Columns.Add("count");
                     text("开始初始化程序...");
                     Cpublic.log.Info("开始初始化程序...");
                     DataRow dr = initialize.NewRow();
@@ -565,10 +558,17 @@ namespace folder
             y += 25;
         }
 
-        private void MonitorFolder_Load(object sender, EventArgs e)
+        private void MonitorFolder_Load(object sender, EventArgs e)//监听菜单初始化调用
         {
             CheckForIllegalCrossThreadCalls = false;
             num.Value = Properties.Settings.Default.tno;
+            Reomname.Columns.Add("path");
+            Reomname.Columns.Add("old");
+            Reomname.Columns.Add("new");
+            create.Columns.Add("path");
+            create.Columns.Add("name");
+            initialize.Columns.Add("path");
+            initialize.Columns.Add("count");
         }
 
         private void button5_Click(object sender, EventArgs e)
