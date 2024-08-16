@@ -197,6 +197,11 @@ namespace folder
                 Cpublic.log.Error("PDF输入或输出目录为空!");
                 return;
             }
+            if (list.Rows.Count==0)
+            {
+                MessageBox.Show("输入目录下无PDF文件", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             try
             {
                 Properties.Settings.Default.xnum = int.Parse(xnum.Value.ToString());
@@ -248,11 +253,11 @@ namespace folder
                 text2 = text2.Replace("\n", "");
                 text2 = text2.Replace("\r", "");
                 var newname = Mtext.Text.ToString() + ("\\") + String.Concat(text2,"_",i.ToString()) + (".pdf");
+                doc.Close();
+                ((IDisposable)doc).Dispose();
                 //string text2 = scanner.Text.ToString();
-                text(text2);
                 if (File.Exists(list.Rows[i]["allname"].ToString()))
                 {
-                    text("开始重命名：" + list.Rows[i]["allname"].ToString());
                     if (!File.Exists(newname))
                     {
                         try
@@ -280,6 +285,7 @@ namespace folder
                 }
             }
             MessageBox.Show("PDF处理完成，共处理文件" + s.ToString(), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            text("PDF处理完成，共处理文件" + s.ToString());
         }
         //提取转换的PDF指定区域文字
         private void PDFSM(object sender, EventArgs e)
