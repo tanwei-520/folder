@@ -20,6 +20,8 @@
     <PackageReference Include="log4net" Version="2.0.14" />
     <PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
     <PackageReference Include="NPOI" Version="2.5.5" />
+    <PackageReference Include="Spire.OCR" Version="1.9.8" />
+    <PackageReference Include="Spire.PDF" Version="10.7.21" />
   </ItemGroup>
 
   <ItemGroup>

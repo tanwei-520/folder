@@ -154,11 +154,11 @@ namespace folder
                     var filtered = files.Where(f => !f.Attributes.HasFlag(FileAttributes.Hidden));//去除隐藏文件
                     foreach (FileInfo Filename in filtered)
                     {
-                        DataRow dr = list.NewRow();
-                        dr["all"] = dir[i];
-                        dr["wname"] = dir[i].Replace(dirs + "\\", "");
-                        dr["fname"] = Filename.Name;
-                        list.Rows.Add(dr);
+                            DataRow dr = list.NewRow();
+                            dr["all"] = dir[i];
+                            dr["wname"] = dir[i].Replace(dirs + "\\", "");
+                            dr["fname"] = Filename.Name;
+                            list.Rows.Add(dr);
                     }
                     Cpublic.log.Info(dir[i] + "，开始遍历");
                     text(dir[i] + "，开始遍历");

@@ -29,134 +29,144 @@ namespace folder
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.批量新建文件夹ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.监听文件夹ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.批量重命名ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.生成文件清单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.显示程序ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.保持最前ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.退出程序ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
-            this.SuspendLayout();
+            menuStrip1 = new System.Windows.Forms.MenuStrip();
+            批量新建文件夹ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            监听文件夹ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            批量重命名ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            生成文件清单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            pDF文件识别ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            notifyIcon1 = new System.Windows.Forms.NotifyIcon(components);
+            contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
+            显示程序ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            保持最前ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            退出程序ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            pDF识别区域调试ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            menuStrip1.SuspendLayout();
+            contextMenuStrip1.SuspendLayout();
+            SuspendLayout();
             // 
             // menuStrip1
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.批量新建文件夹ToolStripMenuItem,
-            this.监听文件夹ToolStripMenuItem,
-            this.批量重命名ToolStripMenuItem,
-            this.生成文件清单ToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(975, 25);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { 批量新建文件夹ToolStripMenuItem, 监听文件夹ToolStripMenuItem, 批量重命名ToolStripMenuItem, 生成文件清单ToolStripMenuItem, pDF文件识别ToolStripMenuItem, pDF识别区域调试ToolStripMenuItem });
+            menuStrip1.Location = new System.Drawing.Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            menuStrip1.Size = new System.Drawing.Size(975, 25);
+            menuStrip1.TabIndex = 0;
+            menuStrip1.Text = "menuStrip1";
             // 
             // 批量新建文件夹ToolStripMenuItem
             // 
-            this.批量新建文件夹ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("批量新建文件夹ToolStripMenuItem.Image")));
-            this.批量新建文件夹ToolStripMenuItem.Name = "批量新建文件夹ToolStripMenuItem";
-            this.批量新建文件夹ToolStripMenuItem.Size = new System.Drawing.Size(120, 21);
-            this.批量新建文件夹ToolStripMenuItem.Text = "批量新建文件夹";
-            this.批量新建文件夹ToolStripMenuItem.Click += new System.EventHandler(this.批量新建文件夹ToolStripMenuItem_Click);
+            批量新建文件夹ToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("批量新建文件夹ToolStripMenuItem.Image");
+            批量新建文件夹ToolStripMenuItem.Name = "批量新建文件夹ToolStripMenuItem";
+            批量新建文件夹ToolStripMenuItem.Size = new System.Drawing.Size(120, 21);
+            批量新建文件夹ToolStripMenuItem.Text = "批量新建文件夹";
+            批量新建文件夹ToolStripMenuItem.Click += 批量新建文件夹ToolStripMenuItem_Click;
             // 
             // 监听文件夹ToolStripMenuItem
             // 
-            this.监听文件夹ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("监听文件夹ToolStripMenuItem.Image")));
-            this.监听文件夹ToolStripMenuItem.Name = "监听文件夹ToolStripMenuItem";
-            this.监听文件夹ToolStripMenuItem.Size = new System.Drawing.Size(96, 21);
-            this.监听文件夹ToolStripMenuItem.Text = "监听文件夹";
-            this.监听文件夹ToolStripMenuItem.Click += new System.EventHandler(this.监听文件夹ToolStripMenuItem_Click);
+            监听文件夹ToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("监听文件夹ToolStripMenuItem.Image");
+            监听文件夹ToolStripMenuItem.Name = "监听文件夹ToolStripMenuItem";
+            监听文件夹ToolStripMenuItem.Size = new System.Drawing.Size(96, 21);
+            监听文件夹ToolStripMenuItem.Text = "监听文件夹";
+            监听文件夹ToolStripMenuItem.Click += 监听文件夹ToolStripMenuItem_Click;
             // 
             // 批量重命名ToolStripMenuItem
             // 
-            this.批量重命名ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("批量重命名ToolStripMenuItem.Image")));
-            this.批量重命名ToolStripMenuItem.Name = "批量重命名ToolStripMenuItem";
-            this.批量重命名ToolStripMenuItem.Size = new System.Drawing.Size(120, 21);
-            this.批量重命名ToolStripMenuItem.Text = "批量重命名文件";
-            this.批量重命名ToolStripMenuItem.Click += new System.EventHandler(this.批量重命名ToolStripMenuItem_Click);
+            批量重命名ToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("批量重命名ToolStripMenuItem.Image");
+            批量重命名ToolStripMenuItem.Name = "批量重命名ToolStripMenuItem";
+            批量重命名ToolStripMenuItem.Size = new System.Drawing.Size(120, 21);
+            批量重命名ToolStripMenuItem.Text = "批量重命名文件";
+            批量重命名ToolStripMenuItem.Click += 批量重命名ToolStripMenuItem_Click;
             // 
             // 生成文件清单ToolStripMenuItem
             // 
-            this.生成文件清单ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("生成文件清单ToolStripMenuItem.Image")));
-            this.生成文件清单ToolStripMenuItem.Name = "生成文件清单ToolStripMenuItem";
-            this.生成文件清单ToolStripMenuItem.Size = new System.Drawing.Size(108, 21);
-            this.生成文件清单ToolStripMenuItem.Text = "生成文件清单";
-            this.生成文件清单ToolStripMenuItem.Click += new System.EventHandler(this.生成文件清单ToolStripMenuItem_Click);
+            生成文件清单ToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("生成文件清单ToolStripMenuItem.Image");
+            生成文件清单ToolStripMenuItem.Name = "生成文件清单ToolStripMenuItem";
+            生成文件清单ToolStripMenuItem.Size = new System.Drawing.Size(108, 21);
+            生成文件清单ToolStripMenuItem.Text = "生成文件清单";
+            生成文件清单ToolStripMenuItem.Click += 生成文件清单ToolStripMenuItem_Click;
+            // 
+            // pDF文件识别ToolStripMenuItem
+            // 
+            pDF文件识别ToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("pDF文件识别ToolStripMenuItem.Image");
+            pDF文件识别ToolStripMenuItem.Name = "pDF文件识别ToolStripMenuItem";
+            pDF文件识别ToolStripMenuItem.Size = new System.Drawing.Size(118, 21);
+            pDF文件识别ToolStripMenuItem.Text = "PDF文件重命名";
+            pDF文件识别ToolStripMenuItem.Click += pDF文件识别ToolStripMenuItem_Click;
             // 
             // notifyIcon1
             // 
-            this.notifyIcon1.ContextMenuStrip = this.contextMenuStrip1;
-            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-            this.notifyIcon1.Text = "Folder";
-            this.notifyIcon1.Visible = true;
-            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
+            notifyIcon1.ContextMenuStrip = contextMenuStrip1;
+            notifyIcon1.Icon = (System.Drawing.Icon)resources.GetObject("notifyIcon1.Icon");
+            notifyIcon1.Text = "Folder";
+            notifyIcon1.Visible = true;
+            notifyIcon1.MouseDoubleClick += notifyIcon1_MouseDoubleClick;
             // 
             // contextMenuStrip1
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.显示程序ToolStripMenuItem,
-            this.保持最前ToolStripMenuItem,
-            this.退出程序ToolStripMenuItem1});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 70);
+            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { 显示程序ToolStripMenuItem, 保持最前ToolStripMenuItem, 退出程序ToolStripMenuItem1 });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new System.Drawing.Size(125, 70);
             // 
             // 显示程序ToolStripMenuItem
             // 
-            this.显示程序ToolStripMenuItem.Name = "显示程序ToolStripMenuItem";
-            this.显示程序ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.显示程序ToolStripMenuItem.Text = "显示程序";
-            this.显示程序ToolStripMenuItem.Click += new System.EventHandler(this.显示程序ToolStripMenuItem_Click);
+            显示程序ToolStripMenuItem.Name = "显示程序ToolStripMenuItem";
+            显示程序ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            显示程序ToolStripMenuItem.Text = "显示程序";
+            显示程序ToolStripMenuItem.Click += 显示程序ToolStripMenuItem_Click;
             // 
             // 保持最前ToolStripMenuItem
             // 
-            this.保持最前ToolStripMenuItem.CheckOnClick = true;
-            this.保持最前ToolStripMenuItem.Name = "保持最前ToolStripMenuItem";
-            this.保持最前ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.保持最前ToolStripMenuItem.Text = "保持最前";
-            this.保持最前ToolStripMenuItem.Click += new System.EventHandler(this.保持最前ToolStripMenuItem_Click);
+            保持最前ToolStripMenuItem.CheckOnClick = true;
+            保持最前ToolStripMenuItem.Name = "保持最前ToolStripMenuItem";
+            保持最前ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            保持最前ToolStripMenuItem.Text = "保持最前";
+            保持最前ToolStripMenuItem.Click += 保持最前ToolStripMenuItem_Click;
             // 
             // 退出程序ToolStripMenuItem1
             // 
-            this.退出程序ToolStripMenuItem1.Name = "退出程序ToolStripMenuItem1";
-            this.退出程序ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
-            this.退出程序ToolStripMenuItem1.Text = "退出程序";
-            this.退出程序ToolStripMenuItem1.Click += new System.EventHandler(this.退出程序ToolStripMenuItem1_Click);
+            退出程序ToolStripMenuItem1.Name = "退出程序ToolStripMenuItem1";
+            退出程序ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
+            退出程序ToolStripMenuItem1.Text = "退出程序";
+            退出程序ToolStripMenuItem1.Click += 退出程序ToolStripMenuItem1_Click;
+            // 
+            // pDF识别区域调试ToolStripMenuItem
+            // 
+            pDF识别区域调试ToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("pDF识别区域调试ToolStripMenuItem.Image");
+            pDF识别区域调试ToolStripMenuItem.Name = "pDF识别区域调试ToolStripMenuItem";
+            pDF识别区域调试ToolStripMenuItem.Size = new System.Drawing.Size(130, 21);
+            pDF识别区域调试ToolStripMenuItem.Text = "PDF识别区域调试";
+            pDF识别区域调试ToolStripMenuItem.Click += pDF识别区域调试ToolStripMenuItem_Click;
             // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(975, 594);
-            this.Controls.Add(this.menuStrip1);
-            this.DoubleBuffered = true;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.IsMdiContainer = true;
-            this.MainMenuStrip = this.menuStrip1;
-            this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(991, 633);
-            this.Name = "Main";
-            this.ShowInTaskbar = false;
-            this.Text = "Folder";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
-            this.SizeChanged += new System.EventHandler(this.Main_MinimumSizeChanged);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            this.contextMenuStrip1.ResumeLayout(false);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoValidate = System.Windows.Forms.AutoValidate.Disable;
+            BackgroundImage = (System.Drawing.Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            ClientSize = new System.Drawing.Size(975, 594);
+            Controls.Add(menuStrip1);
+            DoubleBuffered = true;
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            IsMdiContainer = true;
+            MainMenuStrip = menuStrip1;
+            MaximizeBox = false;
+            MinimumSize = new System.Drawing.Size(991, 633);
+            Name = "Main";
+            ShowInTaskbar = false;
+            Text = "Folder";
+            FormClosed += Main_FormClosed;
+            SizeChanged += Main_MinimumSizeChanged;
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
+            contextMenuStrip1.ResumeLayout(false);
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -171,6 +181,8 @@ namespace folder
         private System.Windows.Forms.ToolStripMenuItem 退出程序ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 批量重命名ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 生成文件清单ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pDF文件识别ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pDF识别区域调试ToolStripMenuItem;
     }
 }
 

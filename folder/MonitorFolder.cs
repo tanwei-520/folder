@@ -21,7 +21,7 @@ namespace folder
         private int length;
         private DataTable list = new DataTable();//目录清单
         private DataTable Data = new DataTable();//模板
-        private string[] lie={"完整目录","目录名称","编号"};
+        private string[] lie = { "完整目录", "目录名称", "编号" };
         private DataTable Reomname = new DataTable();
         private DataTable create = new DataTable();
         private DataTable Duiz = new DataTable();
@@ -78,13 +78,13 @@ namespace folder
                 }
                 DataRow dr = list.NewRow();
                 dr["all"] = Gtext.Text;
-                dr["name"] =Gtext.Text.Substring(Gtext.Text.LastIndexOf("\\") + 1);
+                dr["name"] = Gtext.Text.Substring(Gtext.Text.LastIndexOf("\\") + 1);
                 list.Rows.Add(dr);
                 Cpublic.log.Info(Gtext.Text.Substring(Gtext.Text.LastIndexOf("\\") + 1));
                 dibdad(Gtext.Text);
                 DataTable ac = new DataTable();
-                if (Duiz.Rows.Count>0)
-                {                 
+                if (Duiz.Rows.Count > 0)
+                {
                     ac.Columns.Add("all");
                     ac.Columns.Add("name");
                     ac.Columns.Add("tno");
@@ -174,7 +174,7 @@ namespace folder
             catch (Exception ex)
             {
                 MessageBox.Show("清单生成失败！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                Cpublic.log.Error("清单生成失败！"+ex.Message);
+                Cpublic.log.Error("清单生成失败！" + ex.Message);
             }
         }
         private void director(string dirs)
@@ -196,7 +196,7 @@ namespace folder
                 else
                 {
                     //将得到的文件全路径放入到集合中
-                   // list.Add(fsinfo.FullName);
+                    // list.Add(fsinfo.FullName);
                 }
             }
         }
@@ -207,7 +207,7 @@ namespace folder
                 //文件路径
                 string[] dir = Directory.GetDirectories(dirs);
                 //文件名
-                for (int i=0;i<dir.Length; i++)
+                for (int i = 0; i < dir.Length; i++)
                 {
                     if ((new FileInfo(dir[i]).Attributes & FileAttributes.Hidden) == FileAttributes.Hidden)//去除隐藏文件夹
                     {
@@ -242,9 +242,9 @@ namespace folder
                     };
                     DataRow dr = initialize.NewRow();
                     dr["path"] = dir[i];
-                    dr["count"] =int.Parse(Directory.GetFiles(dir[i]).Length.ToString());
+                    dr["count"] = int.Parse(Directory.GetFiles(dir[i]).Length.ToString());
                     initialize.Rows.Add(dr);
-                    Cpublic.log.Info(dir[i]+"--" + (int.Parse(Directory.GetFiles(dir[i]).Length.ToString())));
+                    Cpublic.log.Info(dir[i] + "--" + (int.Parse(Directory.GetFiles(dir[i]).Length.ToString())));
                     conuts(dir[i]);
                 }
             }
@@ -263,7 +263,7 @@ namespace folder
                 Cpublic.log.Error("监听根目录为空!");
                 return;
             }
-            if (a!=0)
+            if (a != 0)
             {
                 if (fsw.EnableRaisingEvents == true)
                 {
@@ -272,7 +272,7 @@ namespace folder
                     return;
                 }
             }
-            if (Mtext.Text=="")
+            if (Mtext.Text == "")
             {
                 if (MessageBox.Show("当前模板为空，继续仍可监听，但不会进行自动重命名（是/否）", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
@@ -296,27 +296,27 @@ namespace folder
                         Properties.Settings.Default.Save();
                         Cpublic.log.Info("流水号写入程序初始化：当前值" + length.ToString());
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         Properties.Settings.Default.tno = 5;
                         Properties.Settings.Default.Save();
                         Cpublic.log.Info("流水号写入程序初始化失败，将重置为5! " + ex.Message);
                     }
-                    if (length > 8||length< 1 )
+                    if (length > 8 || length < 1)
                     {
                         MessageBox.Show("流水号范围不在限制范围内(1-8)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         Cpublic.log.Error("流水号范围不在限制范围内(1-8)：当前值" + length.ToString());
                         return;
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show("流水号格式输入错误，请输入数字(1-8)", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     Cpublic.log.Error("流水号格式输入错误，请输入数字(1-8)：当前值" + length.ToString());
                     Cpublic.log.Error("流水号转换失败：" + ex.Message);
                     return;
                 }
-                if (end==0) 
+                if (end == 0)
                 {
                     text("开始初始化程序...");
                     Cpublic.log.Info("开始初始化程序...");
@@ -325,9 +325,9 @@ namespace folder
                     dr["count"] = int.Parse(Directory.GetFiles(Gtext.Text).Length.ToString());
                     initialize.Rows.Add(dr);
                     conuts(Gtext.Text);
-                    if (initialize.Rows.Count<1)
+                    if (initialize.Rows.Count < 1)
                     {
-                        Cpublic.log.Error("程序初始化失败！Count="+initialize.Rows.Count);
+                        Cpublic.log.Error("程序初始化失败！Count=" + initialize.Rows.Count);
                         text("程序初始化失败！", 0xFF0000);
                         return;
                     }
@@ -368,40 +368,40 @@ namespace folder
                     Cpublic.log.Info("启动监听");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("未能成功启动监听程序！详情请查看日志！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                Cpublic.log.Error("未能成功启动监听程序："+ex.Message);
+                Cpublic.log.Error("未能成功启动监听程序：" + ex.Message);
             }
         }
 
-        private  void Fsw_Renamed(object sender, RenamedEventArgs e)
+        private void Fsw_Renamed(object sender, RenamedEventArgs e)
         {
-            text("文件重命名："+e.OldName, 0x008B00);
-            text("重命名结果："+e.Name, 0x008B00);
+            text("文件重命名：" + e.OldName, 0x008B00);
+            text("重命名结果：" + e.Name, 0x008B00);
             Cpublic.log.Info("文件重命名：" + e.OldName);
             Cpublic.log.Info("重命名结果：" + e.Name);
-                DataRow dr = Reomname.NewRow();
-                dr["path"] = e.FullPath.Substring(0,e.FullPath.LastIndexOf("\\")); 
-                dr["old"] = e.OldName.Substring(e.OldName.LastIndexOf("\\")+1);
-                dr["new"] = e.Name.Substring(e.Name.LastIndexOf("\\")+1);
-                Reomname.Rows.Add(dr);
+            DataRow dr = Reomname.NewRow();
+            dr["path"] = e.FullPath.Substring(0, e.FullPath.LastIndexOf("\\"));
+            dr["old"] = e.OldName.Substring(e.OldName.LastIndexOf("\\") + 1);
+            dr["new"] = e.Name.Substring(e.Name.LastIndexOf("\\") + 1);
+            Reomname.Rows.Add(dr);
             //WriteLine($"原名：{e.OldName}   新名称：{e.Name}");
         }
-        private  void Fsw_Deleted(object sender, FileSystemEventArgs e)
+        private void Fsw_Deleted(object sender, FileSystemEventArgs e)
         {
             text("删除文件：" + e.Name, 0xFF0000);
             Cpublic.log.Info("删除文件：" + e.Name);
             //  WriteLine($"{e.Name}  我被删除了");
         }
-/*        private  void Fsw_Changed(object sender, FileSystemEventArgs e)
+        /*        private  void Fsw_Changed(object sender, FileSystemEventArgs e)
+                {
+                    text("文件复制或修改（"+e.ChangeType+"）：" + e.Name, 0x10B2AA);
+                    // WriteLine($"{e.Name}  我被修改了");
+                }*/
+        private void Fsw_Created(object sender, FileSystemEventArgs e)
         {
-            text("文件复制或修改（"+e.ChangeType+"）：" + e.Name, 0x10B2AA);
-            // WriteLine($"{e.Name}  我被修改了");
-        }*/
-        private  void Fsw_Created(object sender, FileSystemEventArgs e)
-        {
-            text("创建文件：" + e.Name,0x1C86EE);
+            text("创建文件：" + e.Name, 0x1C86EE);
             Cpublic.log.Info("创建文件：" + e.Name);
             try
             {
@@ -493,7 +493,7 @@ namespace folder
                             // Cpublic.log.Info(e.FullPath.LastIndexOf("\\") + 1);
                             if (checkBox1.Checked == true)
                             {
-                                name = e.Name.Substring(0,e.Name.LastIndexOf(".")-1) + "_" + name+ e.Name.Substring(e.Name.LastIndexOf("."));
+                                name = e.Name.Substring(0, e.Name.LastIndexOf(".") - 1) + "_" + name + e.Name.Substring(e.Name.LastIndexOf("."));
                             }
                             else
                             {
@@ -507,7 +507,7 @@ namespace folder
                             }
                             else
                             {
-                                text("重命名失败,当前路径下存在该文件："+ e.FullPath.Substring(0, e.FullPath.LastIndexOf("\\")) + "\\" + name, 0xFF34B3);
+                                text("重命名失败,当前路径下存在该文件：" + e.FullPath.Substring(0, e.FullPath.LastIndexOf("\\")) + "\\" + name, 0xFF34B3);
                                 Cpublic.log.Error("重命名失败,当前路径下存在该文件：" + e.FullPath.Substring(0, e.FullPath.LastIndexOf("\\")) + "\\" + name);
                             }
                         }
@@ -525,11 +525,11 @@ namespace folder
             }
             catch (Exception ex)
             {
-                Cpublic.log.Error("重命名失败！"+ex.Message);
+                Cpublic.log.Error("重命名失败！" + ex.Message);
             }
-          }
-         public void text(string text)
-         {
+        }
+        public void text(string text)
+        {
             int x = mians.VerticalScroll.Value;
             Label checkBox = new Label
             {
@@ -538,11 +538,11 @@ namespace folder
             };
             checkBox.AutoSize = true;
             checkBox.Text = text;
-         //   mians.Controls.Add(checkBox);
+            //   mians.Controls.Add(checkBox);
             this.Invoke(new Action(() => { mians.Controls.Add(checkBox); }));
             y += 25;
         }
-        public  void text(string text, int coloer)
+        public void text(string text, int coloer)
         {
             int x = mians.VerticalScroll.Value;
             Label checkBox = new Label
@@ -579,10 +579,10 @@ namespace folder
                 text("停止监听");
                 Cpublic.log.Info("停止监听");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("未能成功停止监听程序！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                Cpublic.log.Error("未能成功停止监听程序："+ex.Message);
+                Cpublic.log.Error("未能成功停止监听程序：" + ex.Message);
             }
         }
         private void button2_Click(object sender, EventArgs e)
@@ -654,13 +654,13 @@ namespace folder
                             if (row.GetCell(t) != null && row.GetCell(t).ToString() != "")
                             {
                                 dr[t] = row.GetCell(t).ToString();
-                                
+
                             }
                             else
                             {
                                 dr[t] = "";
                             }
-                           // Cpublic.log.Info(dr[t] = row.GetCell(t).ToString());
+                            // Cpublic.log.Info(dr[t] = row.GetCell(t).ToString());
                         }
                         Data.Rows.Add(dr);
                     }
@@ -675,7 +675,7 @@ namespace folder
                 catch (Exception ex)
                 {
                     MessageBox.Show("模板读取错误！详情请查看日志！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    Cpublic.log.Error("模板读取错误！"+ex.Message);
+                    Cpublic.log.Error("模板读取错误！" + ex.Message);
                     text("模板读取失败", 0xFF34B3);
                 }
             }
@@ -729,7 +729,7 @@ namespace folder
                                 }
                             }
                         }
-                        FileStream fss = new FileStream(@"" + Gtext.Text + "\\重命名记录"+ DateTime.Now.Day.ToString()+ DateTime.Now.ToLongTimeString().ToString().Replace(":","")+".xlsx", FileMode.Create);
+                        FileStream fss = new FileStream(@"" + Gtext.Text + "\\重命名记录" + DateTime.Now.Day.ToString() + DateTime.Now.ToLongTimeString().ToString().Replace(":", "") + ".xlsx", FileMode.Create);
                         workbook.Write(fss);
                         fss.Close();
                         workbook.Close();
@@ -802,9 +802,9 @@ namespace folder
                     row = sheet.GetRow(0);
                     for (int i = 1; i < lie.Length; i++)
                     {
-                        if (lie[i] == row.GetCell(i-1).ToString())
+                        if (lie[i] == row.GetCell(i - 1).ToString())
                         {
-                            Cpublic.log.Info("对照表列名验证正确：" + row.GetCell(i-1).ToString());
+                            Cpublic.log.Info("对照表列名验证正确：" + row.GetCell(i - 1).ToString());
                         }
                         else
                         {
@@ -838,7 +838,7 @@ namespace folder
                 }
                 catch (Exception ex)
                 {
-                    Cpublic.log.Error("对照表读取失败："+ex.Message);
+                    Cpublic.log.Error("对照表读取失败：" + ex.Message);
                     MessageBox.Show("对照表读取失败,详情请查看日志！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
@@ -848,6 +848,15 @@ namespace folder
         {
             mians.Controls.Clear();
             y = 11;
+        }
+
+        private void Gtext_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
         }
     }
 }

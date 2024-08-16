@@ -77,7 +77,7 @@ namespace folder
                 //ss this.Activate();
                 //任务栏区显示图标
                 //this.ActiveMdiChild.Close();
-              // ActiveMdiChild.WindowState = FormWindowState.Maximized;
+                // ActiveMdiChild.WindowState = FormWindowState.Maximized;
                 this.ShowInTaskbar = true;
                 //托盘区图标隐藏
                 notifyIcon1.Visible = true;
@@ -148,6 +148,32 @@ namespace folder
                 ActiveMdiChild.Close();
             }
             Inventory f = new Inventory
+            {
+                MdiParent = this
+            };
+            f.Show();
+        }
+
+        private void pDF文件识别ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+            {
+                ActiveMdiChild.Close();
+            }
+            Pdfident f = new Pdfident
+            {
+                MdiParent = this
+            };
+            f.Show();
+        }
+
+        private void pDF识别区域调试ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+            {
+                ActiveMdiChild.Close();
+            }
+            Preview f = new Preview
             {
                 MdiParent = this
             };

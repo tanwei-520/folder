@@ -5,5 +5,17 @@
     <Setting Name="tno" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">5</Value>
     </Setting>
+    <Setting Name="xnum" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="ynum" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">-210</Value>
+    </Setting>
+    <Setting Name="wnum" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="hnum" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">45</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
