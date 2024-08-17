@@ -82,5 +82,14 @@ namespace folder.Properties {
                 this["hnum"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("TW")]
+        public string id {
+            get {
+                return ((string)(this["id"]));
+            }
+        }
     }
 }

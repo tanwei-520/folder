@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using log4net;
 using log4net.Config;
-
+using System.Management;
 
 namespace folder
 {
@@ -21,6 +21,14 @@ namespace folder
             InitializeComponent();
             this.ShowInTaskbar = true;
             Cpublic.log.Info("程序启动");
+            if (Properties.Settings.Default.id!="TW")
+            {
+                string s = Properties.Settings.Default.id;
+                Cpublic.log.Info(s);
+                    MessageBox.Show("注册码错误！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Environment.Exit(0);
+            }
+            // Environment.Exit(0);
         }
 
         private void 批量新建文件夹ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -178,6 +186,11 @@ namespace folder
                 MdiParent = this
             };
             f.Show();
+        }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -37,12 +37,12 @@ namespace folder
             批量重命名ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             生成文件清单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             pDF文件识别ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            pDF识别区域调试ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             notifyIcon1 = new System.Windows.Forms.NotifyIcon(components);
             contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(components);
             显示程序ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             保持最前ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             退出程序ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            pDF识别区域调试ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
@@ -97,6 +97,14 @@ namespace folder
             pDF文件识别ToolStripMenuItem.Text = "PDF文件重命名";
             pDF文件识别ToolStripMenuItem.Click += pDF文件识别ToolStripMenuItem_Click;
             // 
+            // pDF识别区域调试ToolStripMenuItem
+            // 
+            pDF识别区域调试ToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("pDF识别区域调试ToolStripMenuItem.Image");
+            pDF识别区域调试ToolStripMenuItem.Name = "pDF识别区域调试ToolStripMenuItem";
+            pDF识别区域调试ToolStripMenuItem.Size = new System.Drawing.Size(130, 21);
+            pDF识别区域调试ToolStripMenuItem.Text = "PDF识别区域调试";
+            pDF识别区域调试ToolStripMenuItem.Click += pDF识别区域调试ToolStripMenuItem_Click;
+            // 
             // notifyIcon1
             // 
             notifyIcon1.ContextMenuStrip = contextMenuStrip1;
@@ -133,14 +141,6 @@ namespace folder
             退出程序ToolStripMenuItem1.Text = "退出程序";
             退出程序ToolStripMenuItem1.Click += 退出程序ToolStripMenuItem1_Click;
             // 
-            // pDF识别区域调试ToolStripMenuItem
-            // 
-            pDF识别区域调试ToolStripMenuItem.Image = (System.Drawing.Image)resources.GetObject("pDF识别区域调试ToolStripMenuItem.Image");
-            pDF识别区域调试ToolStripMenuItem.Name = "pDF识别区域调试ToolStripMenuItem";
-            pDF识别区域调试ToolStripMenuItem.Size = new System.Drawing.Size(130, 21);
-            pDF识别区域调试ToolStripMenuItem.Text = "PDF识别区域调试";
-            pDF识别区域调试ToolStripMenuItem.Click += pDF识别区域调试ToolStripMenuItem_Click;
-            // 
             // Main
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -161,6 +161,7 @@ namespace folder
             ShowInTaskbar = false;
             Text = "Folder";
             FormClosed += Main_FormClosed;
+            Load += Main_Load;
             SizeChanged += Main_MinimumSizeChanged;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();

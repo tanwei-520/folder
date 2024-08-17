@@ -8,42 +8,34 @@ using System.Windows.Forms;
 
 namespace folder
 {
-    public partial class Alter : Form
+    public partial class Regcode : Form
     {
-        public Alter()
+        public Regcode()
         {
             InitializeComponent();
-            this.TopMost = true;
+            this.TopMost = true;//置顶
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Cpublic.tno = textBox1.Text;
+            Cpublic.sno = textBox1.Text;
             Close();
             this.Dispose();
         }
 
-        private void Alter_Load(object sender, EventArgs e)
+        private void Regcode_Load(object sender, EventArgs e)
         {
             this.TopMost = true;
         }
 
-        private void Alter_FormClosing(object sender, FormClosingEventArgs e)
+        private void Regcode_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (textBox1.Text == "")
             {
-                MessageBox.Show("编号为空！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("注册码为空！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 e.Cancel = true;
+                Environment.Exit(0);
             }
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
         }
     }
 }

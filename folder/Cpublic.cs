@@ -13,10 +13,7 @@ namespace folder
     {
         public static string AppPath;
         public static string tno { get; set; }
-        public static string xnum { get; set; }
-        public static string ynum { get; set; }
-        public static string wnum { get; set; }
-        public static string hnum { get; set; }
+        public static string sno { get; set; }
         /*        public static void Log(string logs)
                 {
                     if (!File.Exists(AppPath + "log.txt"))

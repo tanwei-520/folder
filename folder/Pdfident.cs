@@ -26,6 +26,7 @@ namespace folder
         public Pdfident()
         {
             InitializeComponent();
+            Cpublic.log.Info("打开PDF识别重命名菜单");
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -46,45 +47,6 @@ namespace folder
                     }
                     Gtext.Text = dialog.SelectedPath;
                     Cpublic.log.Info("选择PDF文件目录 " + dialog.SelectedPath);
-                    if (!list.Columns.Contains("all"))
-                    {
-                        list.Columns.Add("all");
-                    }
-                    if (!list.Columns.Contains("wname"))
-                    {
-                        list.Columns.Add("wname");
-                    }
-                    if (!list.Columns.Contains("allname"))
-                    {
-                        list.Columns.Add("allname");
-                    }
-                    if (!list.Columns.Contains("fname"))
-                    {
-                        list.Columns.Add("fname");
-                    }
-                    list.Clear();
-                    DirectoryInfo Files = new DirectoryInfo(Gtext.Text);
-                    FileInfo[] files = Files.GetFiles();
-                    var filtered = files.Where(f => !f.Attributes.HasFlag(FileAttributes.Hidden));//去除隐藏文件
-                    Cpublic.log.Info(Gtext.Text + "，开始遍历PDF");
-                    text(Gtext.Text + "，开始遍历PDF");
-                    foreach (FileInfo Filename in filtered)
-                    {
-                        if (Filename.Extension.ToUpper() == ".PDF" || Filename.Extension.ToUpper() == ".pdf")
-                        {
-                            DataRow dr = list.NewRow();
-                            dr["all"] = Gtext.Text;
-                            dr["wname"] = Gtext.Text.Substring(Gtext.Text.LastIndexOf("\\") + 1);
-                            dr["allname"] = Filename;
-                            dr["fname"] = Filename.Name;
-                            list.Rows.Add(dr);
-                        }
-                    }
-                    dibdad(Gtext.Text);
-                    if (list.Rows.Count == 0)
-                    {
-                        MessageBox.Show("输入目录下无PDF文件", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
                 }
             }
             catch (Exception ex)
@@ -202,6 +164,47 @@ namespace folder
                 MessageBox.Show("输入目录下无PDF文件", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+            y = 11;
+            list.Clear();
+            if (!list.Columns.Contains("all"))
+            {
+                list.Columns.Add("all");
+            }
+            if (!list.Columns.Contains("wname"))
+            {
+                list.Columns.Add("wname");
+            }
+            if (!list.Columns.Contains("allname"))
+            {
+                list.Columns.Add("allname");
+            }
+            if (!list.Columns.Contains("fname"))
+            {
+                list.Columns.Add("fname");
+            }
+            list.Clear();
+            DirectoryInfo Files = new DirectoryInfo(Gtext.Text);
+            FileInfo[] files = Files.GetFiles();
+            var filtered = files.Where(f => !f.Attributes.HasFlag(FileAttributes.Hidden));//去除隐藏文件
+            Cpublic.log.Info(Gtext.Text + "，开始遍历PDF");
+            text(Gtext.Text + "，开始遍历PDF");
+            foreach (FileInfo Filename in filtered)
+            {
+                if (Filename.Extension.ToUpper() == ".PDF" || Filename.Extension.ToUpper() == ".pdf")
+                {
+                    DataRow dr = list.NewRow();
+                    dr["all"] = Gtext.Text;
+                    dr["wname"] = Gtext.Text.Substring(Gtext.Text.LastIndexOf("\\") + 1);
+                    dr["allname"] = Filename;
+                    dr["fname"] = Filename.Name;
+                    list.Rows.Add(dr);
+                }
+            }
+            dibdad(Gtext.Text);
+            if (list.Rows.Count == 0)
+            {
+                MessageBox.Show("输入目录下无PDF文件", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             try
             {
                 Properties.Settings.Default.xnum = int.Parse(xnum.Value.ToString());
@@ -252,6 +255,7 @@ namespace folder
                 text2 = text2.Replace(" ", "");
                 text2 = text2.Replace("\n", "");
                 text2 = text2.Replace("\r", "");
+                text2 = text2.Replace("\\", "");
                 var newname = Mtext.Text.ToString() + ("\\") + String.Concat(text2,"_",i.ToString()) + (".pdf");
                 doc.Close();
                 ((IDisposable)doc).Dispose();
@@ -263,19 +267,17 @@ namespace folder
                         try
                         {
                             File.Move(list.Rows[i]["allname"].ToString(), newname);
-                            Cpublic.log.Info("成功重命名文件：" + list.Rows[i]["allname"].ToString() + "---" + newname);
                             s++;
                         }
                         catch (Exception ex)
                         {
                             text("重命名失败：" + newname, 0xFF0000);
-                            Cpublic.log.Error("重命名失败：" + list.Rows[i]["allname"].ToString() + "---" + ex.Message);
+                            Cpublic.log.Error("重命名失败：" + list.Rows[i]["allname"].ToString()+""+ex.Message);
                         }
                     }
                     else
                     {
                         text("当前文件夹下已有该名称的文件：" + newname, 0x4876FF);
-                        Cpublic.log.Error("当前文件夹下已有该名称的文件：" + newname);
                     }
                 }
                 else
@@ -318,11 +320,7 @@ namespace folder
 
         private void button3_Click(object sender, EventArgs e)
         {
-            mians.Controls.Clear();
-            y = 11;
-            list.Clear();
-            Gtext.Text = "";
-            Mtext.Text = "";
+            Clearmin();
         }
 
         private void Pdfident_Load(object sender, EventArgs e)//初始加载设置区域值
@@ -331,6 +329,14 @@ namespace folder
             ynum.Value = Properties.Settings.Default.ynum;
             wnum.Value = Properties.Settings.Default.wnum;
             hnum.Value = Properties.Settings.Default.hnum;
+        }
+        private void Clearmin()
+        {
+            mians.Controls.Clear();
+            y = 11;
+            list.Clear();
+            Gtext.Text = "";
+            Mtext.Text = "";
         }
     }
 }
