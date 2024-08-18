@@ -67,7 +67,7 @@ namespace folder
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (Gtext.Text=="")
+            if (Gtext.Text == "")
             {
                 MessageBox.Show("请先设置根目录！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Cpublic.log.Error("未设置根目录！");
@@ -101,13 +101,13 @@ namespace folder
                     int i = 1;
                     int ip = 0;
                     this.panel1.Controls.Clear();
-                    for (; i < sheet.LastRowNum+1; i++)
+                    for (; i < sheet.LastRowNum + 1; i++)
                     {
                         row = sheet.GetRow(i);
                         string url = "";
                         for (int t = row.FirstCellNum; t < row.LastCellNum; t++)
                         {
-                            if (row.GetCell(t) != null&& row.GetCell(t).ToString()!="")
+                            if (row.GetCell(t) != null && row.GetCell(t).ToString() != "")
                             {
                                 url += "\\" + row.GetCell(t).ToString();
                             }
@@ -146,13 +146,13 @@ namespace folder
                             checkBox.AutoSize = true;
                             checkBox.Text = "创建失败：" + url;
                             checkBox.ForeColor = Color.FromArgb(251, 38, 38);
-                            Cpublic.log.Error(url+"创建失败 " + ex.Message);
+                            Cpublic.log.Error(url + "创建失败 " + ex.Message);
                         }
-                        panel1.Controls.Add(checkBox);       
+                        panel1.Controls.Add(checkBox);
                         y += 25;
                     }
                     fileStream.Close();
-                    label3.Text = "共" + (i-1) + "条创建命令，完成"+ip+"条";
+                    label3.Text = "共" + (i - 1) + "条创建命令，完成" + ip + "条";
                     Cpublic.log.Info(label3.Text);
                 }
                 catch (Exception ex)

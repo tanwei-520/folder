@@ -29,121 +29,119 @@ namespace folder
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.Gtext = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.Mtext = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            label1 = new System.Windows.Forms.Label();
+            Gtext = new System.Windows.Forms.TextBox();
+            button1 = new System.Windows.Forms.Button();
+            label2 = new System.Windows.Forms.Label();
+            Mtext = new System.Windows.Forms.TextBox();
+            button2 = new System.Windows.Forms.Button();
+            panel1 = new System.Windows.Forms.Panel();
+            button3 = new System.Windows.Forms.Button();
+            label3 = new System.Windows.Forms.Label();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 33);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 17);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "选择文件根目录";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(33, 33);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(92, 17);
+            label1.TabIndex = 0;
+            label1.Text = "选择文件根目录";
             // 
             // Gtext
             // 
-            this.Gtext.Location = new System.Drawing.Point(143, 30);
-            this.Gtext.Name = "Gtext";
-            this.Gtext.ReadOnly = true;
-            this.Gtext.Size = new System.Drawing.Size(685, 23);
-            this.Gtext.TabIndex = 1;
+            Gtext.Location = new System.Drawing.Point(143, 30);
+            Gtext.Name = "Gtext";
+            Gtext.ReadOnly = true;
+            Gtext.Size = new System.Drawing.Size(685, 23);
+            Gtext.TabIndex = 1;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(866, 28);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(67, 27);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "浏览";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            button1.Location = new System.Drawing.Point(866, 28);
+            button1.Name = "button1";
+            button1.Size = new System.Drawing.Size(67, 27);
+            button1.TabIndex = 2;
+            button1.Text = "浏览";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(69, 76);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 17);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "选择模板";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(69, 76);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(56, 17);
+            label2.TabIndex = 3;
+            label2.Text = "选择模板";
             // 
             // Mtext
             // 
-            this.Mtext.Location = new System.Drawing.Point(143, 76);
-            this.Mtext.Name = "Mtext";
-            this.Mtext.ReadOnly = true;
-            this.Mtext.Size = new System.Drawing.Size(685, 23);
-            this.Mtext.TabIndex = 4;
+            Mtext.Location = new System.Drawing.Point(143, 76);
+            Mtext.Name = "Mtext";
+            Mtext.ReadOnly = true;
+            Mtext.Size = new System.Drawing.Size(685, 23);
+            Mtext.TabIndex = 4;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(866, 74);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(67, 27);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "浏览";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            button2.Location = new System.Drawing.Point(866, 74);
+            button2.Name = "button2";
+            button2.Size = new System.Drawing.Size(67, 27);
+            button2.TabIndex = 5;
+            button2.Text = "浏览";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // panel1
             // 
-            this.panel1.AutoScroll = true;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Location = new System.Drawing.Point(33, 186);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(900, 370);
-            this.panel1.TabIndex = 6;
+            panel1.AutoScroll = true;
+            panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panel1.Location = new System.Drawing.Point(33, 186);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(900, 370);
+            panel1.TabIndex = 6;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(440, 129);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(67, 27);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "开始新建";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            button3.Location = new System.Drawing.Point(440, 129);
+            button3.Name = "button3";
+            button3.Size = new System.Drawing.Size(67, 27);
+            button3.TabIndex = 7;
+            button3.Text = "开始新建";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(33, 164);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(18, 17);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "--";
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(33, 164);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(18, 17);
+            label3.TabIndex = 8;
+            label3.Text = "--";
             // 
             // NewFolder
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(971, 576);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.Mtext);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.Gtext);
-            this.Controls.Add(this.label1);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "NewFolder";
-            this.Text = "批量新建文件夹";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(971, 576);
+            Controls.Add(label3);
+            Controls.Add(button3);
+            Controls.Add(panel1);
+            Controls.Add(button2);
+            Controls.Add(Mtext);
+            Controls.Add(label2);
+            Controls.Add(button1);
+            Controls.Add(Gtext);
+            Controls.Add(label1);
+            MinimizeBox = false;
+            Name = "NewFolder";
+            Text = "批量新建文件夹";
+            WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

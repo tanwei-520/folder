@@ -198,7 +198,6 @@
             Controls.Add(button1);
             Controls.Add(Gtext);
             Controls.Add(label1);
-            MaximizeBox = false;
             MinimizeBox = false;
             Name = "Preview";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

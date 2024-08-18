@@ -159,11 +159,6 @@ namespace folder
                 Cpublic.log.Error("PDF输入或输出目录为空!");
                 return;
             }
-            if (list.Rows.Count==0)
-            {
-                MessageBox.Show("输入目录下无PDF文件", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
             y = 11;
             list.Clear();
             if (!list.Columns.Contains("all"))
@@ -187,7 +182,6 @@ namespace folder
             FileInfo[] files = Files.GetFiles();
             var filtered = files.Where(f => !f.Attributes.HasFlag(FileAttributes.Hidden));//去除隐藏文件
             Cpublic.log.Info(Gtext.Text + "，开始遍历PDF");
-            text(Gtext.Text + "，开始遍历PDF");
             foreach (FileInfo Filename in filtered)
             {
                 if (Filename.Extension.ToUpper() == ".PDF" || Filename.Extension.ToUpper() == ".pdf")
@@ -201,6 +195,11 @@ namespace folder
                 }
             }
             dibdad(Gtext.Text);
+            if (list.Rows.Count == 0)
+            {
+                MessageBox.Show("输入目录下无PDF文件", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             if (list.Rows.Count == 0)
             {
                 MessageBox.Show("输入目录下无PDF文件", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -227,6 +226,7 @@ namespace folder
                 Cpublic.log.Info("坐标写入程序初始化失败，将重置为0! " + ex.Message);
             }
             int s = 0;
+            text("开始处理...");
             for (int i = 0; i < list.Rows.Count; i++)
             {
                 var filepath = list.Rows[i]["allname"].ToString();
@@ -256,7 +256,10 @@ namespace folder
                 text2 = text2.Replace("\n", "");
                 text2 = text2.Replace("\r", "");
                 text2 = text2.Replace("\\", "");
-                var newname = Mtext.Text.ToString() + ("\\") + String.Concat(text2,"_",i.ToString()) + (".pdf");
+                text2 = text2.Replace("|", "");
+                text2 = text2.Replace("/", "");
+                text2 = text2.Replace(":", "");
+                var newname = Mtext.Text.ToString() + ("\\") + String.Concat(text2, "_", i.ToString()) + (".pdf");
                 doc.Close();
                 ((IDisposable)doc).Dispose();
                 //string text2 = scanner.Text.ToString();
@@ -272,7 +275,7 @@ namespace folder
                         catch (Exception ex)
                         {
                             text("重命名失败：" + newname, 0xFF0000);
-                            Cpublic.log.Error("重命名失败：" + list.Rows[i]["allname"].ToString()+""+ex.Message);
+                            Cpublic.log.Error("重命名失败：" + list.Rows[i]["allname"].ToString() + "" + ex.Message);
                         }
                     }
                     else

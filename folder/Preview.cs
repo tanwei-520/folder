@@ -42,36 +42,36 @@ namespace folder
 
         private void button4_Click(object sender, EventArgs e)
         {
-                PdfDocument doc = new PdfDocument();
+            PdfDocument doc = new PdfDocument();
 
-                //加载PDF文件
-                doc.LoadFromFile(Gtext.Text);
+            //加载PDF文件
+            doc.LoadFromFile(Gtext.Text);
 
-                //获取指定页面
-                PdfPageBase page = doc.Pages[0];
+            //获取指定页面
+            PdfPageBase page = doc.Pages[0];
 
-                //创建一个 PdfTextExtractot 对象
-                PdfTextExtractor textExtractor = new PdfTextExtractor(page);
+            //创建一个 PdfTextExtractot 对象
+            PdfTextExtractor textExtractor = new PdfTextExtractor(page);
 
-                //创建一个 PdfTextExtractOptions 对象
-                PdfTextExtractOptions extractOptions = new PdfTextExtractOptions();
+            //创建一个 PdfTextExtractOptions 对象
+            PdfTextExtractOptions extractOptions = new PdfTextExtractOptions();
 
-                //设置矩形区域范围
-                extractOptions.ExtractArea = new RectangleF(float.Parse(xnum.Value.ToString()), float.Parse(ynum.Value.ToString()), float.Parse(wnum.Value.ToString()), float.Parse(hnum.Value.ToString()));
-                //OcrScanner scanner = new OcrScanner();
+            //设置矩形区域范围
+            extractOptions.ExtractArea = new RectangleF(float.Parse(xnum.Value.ToString()), float.Parse(ynum.Value.ToString()), float.Parse(wnum.Value.ToString()), float.Parse(hnum.Value.ToString()));
+            //OcrScanner scanner = new OcrScanner();
 
-                //scanner.Scan("F:\\测试\\页面提取自－组合 1.jpg");
-                //从指定区域中提取文本
-                string text2 = textExtractor.ExtractText(extractOptions);
-                text2 = text2.Replace("Evaluation Warning : The document was created with Spire.PDF for .NET.", "");
-                text2 = text2.Replace(" ", "");
-                text2 = text2.Replace("\n", "");
-                text2 = text2.Replace("\r", "");
-                //string text2 = scanner.Text.ToString();
-                mians.Controls.Clear();
-                y = 11;
-                text("识别内容:"+text2);
-         }
+            //scanner.Scan("F:\\测试\\页面提取自－组合 1.jpg");
+            //从指定区域中提取文本
+            string text2 = textExtractor.ExtractText(extractOptions);
+            text2 = text2.Replace("Evaluation Warning : The document was created with Spire.PDF for .NET.", "");
+            text2 = text2.Replace(" ", "");
+            text2 = text2.Replace("\n", "");
+            text2 = text2.Replace("\r", "");
+            //string text2 = scanner.Text.ToString();
+            mians.Controls.Clear();
+            y = 11;
+            text("识别内容:" + text2);
+        }
         //文本信息输出
         public void text(string text)
         {
