@@ -11,6 +11,9 @@ using System.IO;
 using log4net;
 using log4net.Config;
 using System.Management;
+using System.Configuration;
+using System.Reflection;
+using System.Runtime.Serialization;
 
 namespace folder
 {
@@ -21,12 +24,18 @@ namespace folder
             InitializeComponent();
             this.ShowInTaskbar = true;
             Cpublic.log.Info("程序启动");
-            if (Properties.Settings.Default.id!="TW")
+            string startupPath = AppDomain.CurrentDomain.BaseDirectory;//获取当前程序启动路径
+            Configuration config = System.Configuration.ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);//声明对象Config
+            string mySetting = config.AppSettings.Settings["path"].Value;//读取path值
+            string id = config.AppSettings.Settings["id"].Value;
+            if (id != "TW"|| startupPath!= mySetting)
             {
-                string s = Properties.Settings.Default.id;
-                Cpublic.log.Info(s);
-                    MessageBox.Show("注册码错误！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    Environment.Exit(0);
+                MessageBox.Show("注册码验证失败！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Cpublic.log.Error("注册码验证失败！");
+                config.AppSettings.Settings["path"].Value = startupPath;//修改path值
+                config.AppSettings.Settings["id"].Value = "";
+                config.Save(ConfigurationSaveMode.Modified);//保存配置
+                Environment.Exit(0);
             }
             // Environment.Exit(0);
         }

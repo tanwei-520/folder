@@ -256,6 +256,9 @@ namespace folder
                 text2 = text2.Replace("\n", "");
                 text2 = text2.Replace("\r", "");
                 text2 = text2.Replace("\\", "");
+                text2 = text2.Replace("|", "");
+                text2 = text2.Replace("/", "");
+                text2 = text2.Replace(":", "");
                 var newname = Mtext.Text.ToString() + ("\\") + String.Concat(text2,"_",i.ToString()) + (".pdf");
                 doc.Close();
                 ((IDisposable)doc).Dispose();
