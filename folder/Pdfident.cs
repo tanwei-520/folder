@@ -153,10 +153,10 @@ namespace folder
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (Gtext.Text == "" || Mtext.Text == "")
+            if (Gtext.Text == "" || Mtext.Text == ""|| Gtext.Text == Mtext.Text)
             {
-                MessageBox.Show("输入或输出目录为空！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                Cpublic.log.Error("PDF输入或输出目录为空!");
+                MessageBox.Show("输入或输出目录设置有误！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Cpublic.log.Error("PDF输入或输出目录设置有误!");
                 return;
             }
             y = 11;

@@ -161,7 +161,6 @@ namespace folder
             ShowInTaskbar = false;
             Text = "Folder";
             FormClosed += Main_FormClosed;
-            Load += Main_Load;
             SizeChanged += Main_MinimumSizeChanged;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();

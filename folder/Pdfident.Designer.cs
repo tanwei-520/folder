@@ -224,11 +224,11 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new System.Drawing.Point(659, 142);
+            label8.Location = new System.Drawing.Point(632, 144);
             label8.Name = "label8";
-            label8.Size = new System.Drawing.Size(174, 17);
+            label8.Size = new System.Drawing.Size(318, 17);
             label8.TabIndex = 36;
-            label8.Text = "使用前请备份需处理的PDF文件";
+            label8.Text = "使用前请备份需处理的PDF文件，输入输出目录不能相同！";
             // 
             // Pdfident
             // 

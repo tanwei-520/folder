@@ -28,7 +28,7 @@ namespace folder
             Configuration config = System.Configuration.ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);//声明对象Config
             string mySetting = config.AppSettings.Settings["path"].Value;//读取path值
             string id = config.AppSettings.Settings["id"].Value;
-            if (id != "TW"|| startupPath!= mySetting)
+            if (id != "TW520"|| startupPath!= mySetting)
             {
                 MessageBox.Show("注册码验证失败！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Cpublic.log.Error("注册码验证失败！");
@@ -195,11 +195,6 @@ namespace folder
                 MdiParent = this
             };
             f.Show();
-        }
-
-        private void Main_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
