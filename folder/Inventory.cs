@@ -70,11 +70,15 @@ namespace folder
                 {
                     list.Columns.Add("fname");
                 }
+                if (!list.Columns.Contains("fullname"))
+                {
+                    list.Columns.Add("fullname");
+                }
                 list.Clear();
                 DirectoryInfo Files = new DirectoryInfo(Gtext.Text);
                 FileInfo[] files = Files.GetFiles();
                 var filtered = files.Where(f => !f.Attributes.HasFlag(FileAttributes.Hidden));//去除隐藏文件
-                Cpublic.log.Info(Gtext.Text + "，开始遍历");
+                //Cpublic.log.Info(Gtext.Text + "，开始遍历");
                 text(Gtext.Text + "，开始遍历");
                 foreach (FileInfo Filename in filtered)
                 {
@@ -82,6 +86,7 @@ namespace folder
                     dr["all"] = Gtext.Text;
                     dr["wname"] = Gtext.Text.Substring(Gtext.Text.LastIndexOf("\\") + 1);
                     dr["fname"] = Filename.Name;
+                    dr["fullname"] = Filename.FullName;
                     list.Rows.Add(dr);
                 }
                 dibdad(Gtext.Text);
@@ -102,6 +107,7 @@ namespace folder
                     sheetcell[0].SetCellValue("完整目录");
                     sheetcell[1].SetCellValue("目录名称");
                     sheetcell[2].SetCellValue("文件名称");
+                    sheetcell[3].SetCellValue("文件路径");
                     for (int i = 0; i < list.Rows.Count; i++)
                     {
                         sheetrow = (XSSFRow)sheet.GetRow(i + 1);
@@ -158,7 +164,8 @@ namespace folder
                             dr["all"] = dir[i];
                             dr["wname"] = dir[i].Replace(dirs + "\\", "");
                             dr["fname"] = Filename.Name;
-                            list.Rows.Add(dr);
+                            dr["fullname"] = Filename.FullName;
+                        list.Rows.Add(dr);
                     }
                     Cpublic.log.Info(dir[i] + "，开始遍历");
                     text(dir[i] + "，开始遍历");

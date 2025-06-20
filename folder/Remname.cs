@@ -111,7 +111,7 @@ namespace folder
                     Data.Rows.Add(dr);
                 }
                 fileStream.Close();
-                MessageBox.Show("模板读取成功，共" + Data.Rows.Count + "行数据。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show("模板读取成功，共" + Data.Rows.Count + "行数据。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Cpublic.log.Info("模板读取成功，共" + Data.Rows.Count + "行数据。");
                 text("开始批量重命名");
                 Cpublic.log.Info("开始批量重命名。");
@@ -120,13 +120,13 @@ namespace folder
                 {
                     if (File.Exists(Data.Rows[i]["old"].ToString()))
                     {
-                       text("开始重命名：" + Data.Rows[i]["old"].ToString());
+                       //text("开始重命名：" + Data.Rows[i]["old"].ToString());
                         if (!File.Exists(Data.Rows[i]["new"].ToString()))
                         {                        
                             try
                             {
                                 File.Move(Data.Rows[i]["old"].ToString(), Data.Rows[i]["new"].ToString());
-                                Cpublic.log.Info("成功重命名文件：" + Data.Rows[i]["old"].ToString() + "---" + Data.Rows[i]["new"].ToString());
+                                //Cpublic.log.Info("成功重命名文件：" + Data.Rows[i]["old"].ToString() + "---" + Data.Rows[i]["new"].ToString());
                                 s++;
                             }
                             catch (Exception ex)

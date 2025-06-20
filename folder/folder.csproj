@@ -17,6 +17,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Excel模板\新建文件夹模板.xlsx" />
+    <None Remove="Excel模板\编码对照表 - 副本.xlsx" />
+    <None Remove="Excel模板\编码对照表.xlsx" />
+    <None Remove="Excel模板\重命名模板.xlsx" />
+  </ItemGroup>
+
+  <ItemGroup>
     <COMReference Include="MMC20">
       <WrapperTool>tlbimp</WrapperTool>
       <VersionMinor>0</VersionMinor>
@@ -29,10 +36,25 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Excel模板\新建文件夹模板.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Excel模板\编码对照表 - 副本.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Excel模板\编码对照表.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Excel模板\重命名模板.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="log4net" Version="2.0.14" />
     <PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
     <PackageReference Include="NPOI" Version="2.7.1" />
-    <PackageReference Include="Spire.PDF" Version="10.7.21" />
+    <PackageReference Include="Spire.PDF" Version="11.5.9" />
     <PackageReference Include="System.Management" Version="8.0.0" />
   </ItemGroup>
 
