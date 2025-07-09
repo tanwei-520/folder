@@ -129,9 +129,9 @@ namespace folder
                             {
                                 Directory.CreateDirectory(@"" + url);
                                 checkBox.AutoSize = true;
-                                checkBox.Text = "成功创建" + url;
+                                //checkBox.Text = "成功创建" + url;
                                 ip++;
-                                Cpublic.log.Info("新建文件夹成功：" + url);
+                                //Cpublic.log.Info("新建文件夹成功：" + url);
                             }
                             else
                             {

@@ -18,6 +18,7 @@ namespace folder
         public Preview()
         {
             InitializeComponent();
+            Cpublic.log.Info("打开PDF识别调试菜单");
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -42,6 +43,12 @@ namespace folder
 
         private void button4_Click(object sender, EventArgs e)
         {
+            if (Gtext.Text=="")
+            {
+                MessageBox.Show("文件路径不能为空！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Cpublic.log.Error("文件路径不能为空！");
+                return;
+            }
             PdfDocument doc = new PdfDocument();
 
             //加载PDF文件
