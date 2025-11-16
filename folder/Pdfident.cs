@@ -295,6 +295,7 @@ namespace folder
             }
             MessageBox.Show("PDF处理完成，共处理文件" + s.ToString(), "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             text("PDF处理完成，共处理文件" + s.ToString());
+            Cpublic.log.Info("PDF处理完成，共处理文件" + s.ToString());
         }
         //提取转换的PDF指定区域文字
         private void PDFSM(object sender, EventArgs e)

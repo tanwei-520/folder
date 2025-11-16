@@ -1,15 +1,16 @@
-﻿using System;
+﻿using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
+using Spire.Additions.Xps.Schema;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
 using System.IO;
 using System.Linq;
-using NPOI.SS.UserModel;
-using NPOI.XSSF.UserModel;
-using NPOI.HSSF.UserModel;
+using System.Text;
+using System.Windows.Forms;
 
 namespace folder
 {
@@ -17,6 +18,7 @@ namespace folder
     {
         private static int y = 11;
         private string[] lie = { "原文件名", "新文件名" };
+        private int count = 0;
         public Remname()
         {
             InitializeComponent();
@@ -198,15 +200,15 @@ namespace folder
                     return;
                 }
                 textBox1.Text = dialog.SelectedPath; //获取文件夹路径 
-                Cpublic.log.Info("选择文件夹：" + dialog.SelectedPath);
+                Cpublic.log.Info("选择修改后缀名文件夹：" + dialog.SelectedPath);
             }
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            if (textBox1.Text == ""||only.Text=="")
+            if (textBox1.Text == ""||only.Text.IndexOf(".")!=0)
             {
-                MessageBox.Show("路径或后缀名为空！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("路径或后缀名错误！", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             Cpublic.log.Info("开始修改文件后缀名");
@@ -218,7 +220,7 @@ namespace folder
                 try
                 {
                     File.Move(Filename.FullName, Filename.FullName.Replace(Filename.FullName.Substring(Filename.FullName.IndexOf(".")), only.Text));
-                    Cpublic.log.Info("成功修改文件>>：" + Filename.Name);
+                    count++;
                 }
                 catch (Exception ex)
                 {
@@ -226,7 +228,53 @@ namespace folder
                     Cpublic.log.Error("重命名失败：" + Filename.FullName+""+ex.Message);
                 }
             }
-            MessageBox.Show("重命名完成！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (Onlycurrent.Checked==false)
+            {
+                dibdad(textBox1.Text);
+            }
+            MessageBox.Show("重命名完成！成功修改"+ count + "个文件", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Cpublic.log.Info("重命名完成！成功修改" + count + "个文件");
+            count = 0;
+        }
+        private void dibdad(string dirs)
+        {
+            if (Directory.Exists(dirs))
+            {
+                //文件路径
+                string[] dir = Directory.GetDirectories(dirs);
+                //文件名
+                for (int i = 0; i < dir.Length; i++)
+                {
+                    if ((new FileInfo(dir[i]).Attributes & FileAttributes.Hidden) == FileAttributes.Hidden)//去除隐藏文件夹
+                    {
+                        continue;
+                    }
+                    ;
+                    DirectoryInfo Files = new DirectoryInfo(dir[i]);
+                    FileInfo[] files = Files.GetFiles();
+                    var filtered = files.Where(f => !f.Attributes.HasFlag(FileAttributes.Hidden));//去除隐藏文件
+                    foreach (FileInfo Filename in filtered)
+                    {
+                        try
+                        {
+                            File.Move(Filename.FullName, Filename.FullName.Replace(Filename.FullName.Substring(Filename.FullName.IndexOf(".")), only.Text));
+                            count++;
+                        }
+                        catch (Exception ex)
+                        {
+                            text("重命名失败：" + Filename.FullName, 0xFF0000);
+                            Cpublic.log.Error("重命名失败：" + Filename.FullName + "" + ex.Message);
+                        }
+                    }
+                    Cpublic.log.Info(dir[i] + "，开始遍历PDF");
+                    dibdad(dir[i]);
+                }
+            }
+            else
+            {
+                text("路径有误：" + dirs, 0xFF0000);
+                Cpublic.log.Error("路径有误：" + dirs);
+            }
         }
     }
 }
